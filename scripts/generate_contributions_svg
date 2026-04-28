@@ -41,6 +41,8 @@ MONTH_NAMES = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
 
 def load_data
   years = {}
+  totals = { contributions: 0, commits: 0, prs: 0, reviews: 0, issues: 0, repos: Set.new }
+
   Dir.glob(File.join(DATA_DIR, "*.json")).sort.each do |f|
     year = File.basename(f, ".json").to_i
     raw = JSON.parse(File.read(f))
@@ -50,8 +52,17 @@ def load_data
     days.each { |d| months[d["date"][5..6].to_i] += d["contributionCount"] }
 
     years[year] = months
+
+    totals[:contributions] += raw["contributionCalendar"]["totalContributions"]
+    totals[:commits] += raw["totalCommitContributions"]
+    totals[:prs] += raw["totalPullRequestContributions"]
+    totals[:reviews] += raw["totalPullRequestReviewContributions"]
+    totals[:issues] += raw["totalIssueContributions"]
+    raw["commitContributionsByRepository"].each { |r| totals[:repos] << r["repository"]["nameWithOwner"] }
   end
-  years.sort_by(&:first)
+
+  totals[:repos] = totals[:repos].size
+  [years.sort_by(&:first), totals]
 end
 
 # --- color ---
@@ -115,6 +126,76 @@ def year_svg(year, months, thresholds, show_label: false, first: false)
   lines.join("\n") + "\n"
 end
 
+# --- stats SVG ---
+
+def stats_svg(totals)
+  # Diamond chart like GitHub's activity overview, with counts instead of %
+  # 4 axes: Commits (top), Code review (right), Pull requests (bottom), Issues (left)
+  w = 240
+  h = 200
+  cx = w / 2.0
+  cy = h / 2.0 + 5
+  radius = 65
+
+  values = [totals[:commits], totals[:reviews], totals[:prs], totals[:issues]]
+  max_val = values.max.to_f
+  # Normalize to 0.15..1.0 range so even small values are visible
+  norms = values.map { |v| v == 0 ? 0.0 : 0.15 + 0.85 * (v / max_val) }
+
+  # Axis directions: top, right, bottom, left
+  dirs = [[0, -1], [1, 0], [0, 1], [-1, 0]]
+
+  # Diamond outline points (full radius)
+  outline = dirs.map { |dx, dy| [cx + dx * radius, cy + dy * radius] }
+  # Data shape points
+  shape = dirs.each_with_index.map { |(dx, dy), i| [cx + dx * radius * norms[i], cy + dy * radius * norms[i]] }
+
+  labels = [
+    { text: "Commits",        count: totals[:commits],  x: cx,          y: cy - radius - 12, anchor: "middle" },
+    { text: "Code review",    count: totals[:reviews],  x: cx + radius + 8, y: cy + 4,       anchor: "start" },
+    { text: "Pull requests",  count: totals[:prs],      x: cx,          y: cy + radius + 18, anchor: "middle" },
+    { text: "Issues",         count: totals[:issues],   x: cx - radius - 8, y: cy + 4,       anchor: "end" },
+  ]
+
+  lines = []
+  lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
+  lines << %(<style>)
+  lines << %(  text { font-family: #{FONT_FAMILY}; font-size: #{FONT_SIZE}px; fill: #57606a; })
+  lines << %(  .count { font-weight: 600; })
+  lines << %(</style>)
+
+  # Grid lines (diamond outline)
+  [0.33, 0.66, 1.0].each do |scale|
+    pts = dirs.map { |dx, dy| "#{cx + dx * radius * scale},#{cy + dy * radius * scale}" }.join(" ")
+    lines << %(<polygon points="#{pts}" fill="none" stroke="#ebedf0" stroke-width="1" />)
+  end
+
+  # Axis lines
+  dirs.each do |dx, dy|
+    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#ebedf0" stroke-width="1" />)
+  end
+
+  # Data shape
+  pts = shape.map { |x, y| "#{x},#{y}" }.join(" ")
+  lines << %(<polygon points="#{pts}" fill="rgba(64, 196, 99, 0.25)" stroke="#40c463" stroke-width="2" />)
+
+  # Data points
+  shape.each do |x, y|
+    lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#40c463" />)
+  end
+
+  # Labels with counts
+  labels.each do |l|
+    formatted = l[:count].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+    lines << %(<text x="#{l[:x]}" y="#{l[:y]}" text-anchor="#{l[:anchor]}">)
+    lines << %(  <tspan class="count">#{formatted}</tspan> #{l[:text]})
+    lines << %(</text>)
+  end
+
+  lines << %(</svg>)
+  lines.join("\n") + "\n"
+end
+
 # --- README snippet ---
 
 IMG_PREFIX = "images/contributions"
@@ -131,28 +212,38 @@ def readme_snippet(year_data)
 end
 
 README_PATH = File.expand_path("../README.md", __dir__)
-MARKER_BEGIN = "<!-- HEATMAP BEGIN -->"
-MARKER_END   = "<!-- HEATMAP END -->"
 
-def update_readme(year_data)
-  content = File.read(README_PATH)
-  snippet = readme_snippet(year_data)
-  replacement = "#{MARKER_BEGIN}\n#{snippet}\n#{MARKER_END}"
-
-  unless content.include?(MARKER_BEGIN) && content.include?(MARKER_END)
-    warn "  README.md missing HEATMAP markers, skipping update"
-    return
+def replace_block(content, name, snippet)
+  marker_begin = "<!-- #{name} BEGIN -->"
+  marker_end   = "<!-- #{name} END -->"
+  unless content.include?(marker_begin) && content.include?(marker_end)
+    warn "  README.md missing #{name} markers, skipping"
+    return content
   end
+  content.sub(/#{Regexp.escape(marker_begin)}.*?#{Regexp.escape(marker_end)}/m,
+              "#{marker_begin}\n#{snippet}\n#{marker_end}")
+end
 
-  updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
-  File.write(README_PATH, updated)
+def update_readme(year_data, totals)
+  content = File.read(README_PATH)
+
+  formatted_total = totals[:contributions].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+
+  content = replace_block(content, "TOTAL",
+    "#{formatted_total} contributions in total across #{totals[:repos]} repos")
+  content = replace_block(content, "HEATMAP",
+    readme_snippet(year_data))
+  content = replace_block(content, "STATS",
+    %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />))
+
+  File.write(README_PATH, content)
   warn "  README.md updated"
 end
 
 # --- main ---
 
 def main
-  year_data = load_data
+  year_data, totals = load_data
   if year_data.empty?
     warn "No data in #{DATA_DIR}. Run fetch_contributions.rb first."
     exit 1
@@ -167,7 +258,10 @@ def main
     warn "  #{path}"
   end
 
-  update_readme(year_data)
+  File.write(File.join(OUT_DIR, "stats.svg"), stats_svg(totals))
+  warn "  stats.svg"
+
+  update_readme(year_data, totals)
 
   warn "Done. #{year_data.length} year SVGs generated."
 end

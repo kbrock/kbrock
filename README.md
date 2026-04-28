@@ -1,6 +1,8 @@
 # <img src="images/gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan
 
-## Annual Contributions
+<!-- TOTAL BEGIN -->
+14,306 contributions in total across 268 repos
+<!-- TOTAL END -->
 
 <!-- HEATMAP BEGIN -->
 <a href="https://github.com/kbrock?tab=overview&from=2008-01-01&to=2008-12-31" title="6 contributions in 2008"><img src="images/contributions/2008.svg" alt="2008" /></a>
@@ -23,4 +25,8 @@
 <a href="https://github.com/kbrock?tab=overview&from=2025-01-01&to=2025-12-31" title="680 contributions in 2025"><img src="images/contributions/2025.svg" alt="2025" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2026-01-01&to=2026-12-31" title="417 contributions in 2026"><img src="images/contributions/2026.svg" alt="2026" /></a>
 <!-- HEATMAP END -->
+
+<!-- STATS BEGIN -->
+<img src="images/contributions/stats.svg" alt="Activity overview" />
+<!-- STATS END -->
 
