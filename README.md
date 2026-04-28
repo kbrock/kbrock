@@ -3,8 +3,6 @@
 <!-- CONTRIBUTIONS BEGIN -->
 14,306 contributions in total
 
-<img src="images/contributions/total.svg" alt="14,306 contributions in total" />
-
 <a href="https://github.com/kbrock?tab=overview&from=2008-01-01&to=2008-12-31" title="6 contributions in 2008"><img src="images/contributions/2008.svg" alt="2008" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2009-01-01&to=2009-12-31" title="41 contributions in 2009"><img src="images/contributions/2009.svg" alt="2009" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2010-01-01&to=2010-12-31" title="52 contributions in 2010"><img src="images/contributions/2010.svg" alt="2010" /></a>

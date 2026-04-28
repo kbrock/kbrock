@@ -132,19 +132,6 @@ end
 
 # --- stats SVG ---
 
-def total_svg(totals)
-  text = "#{format_count(totals[:contributions])} contributions in total"
-  w = 400
-  h = 20
-
-  lines = []
-  lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
-  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:16px;fill:#1f2328}</style>)
-  lines << %(<text x="0" y="15">#{text}</text>)
-  lines << %(</svg>)
-  lines.join("\n") + "\n"
-end
-
 def format_count(n)
   n.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
 end
@@ -282,8 +269,6 @@ def update_readme(year_data, totals)
   snippet = []
   snippet << "#{formatted_total} contributions in total"
   snippet << ""
-  snippet << %(<img src="#{IMG_PREFIX}/total.svg" alt="#{formatted_total} contributions in total" />)
-  snippet << ""
   snippet << readme_snippet(year_data)
   snippet << ""
   snippet << activity_overview(totals)
@@ -311,9 +296,6 @@ def main
     File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0), first: (i == 0)))
     warn "  #{path}"
   end
-
-  File.write(File.join(OUT_DIR, "total.svg"), total_svg(totals))
-  warn "  total.svg"
 
   File.write(File.join(OUT_DIR, "stats.svg"), stats_svg(totals))
   warn "  stats.svg"
