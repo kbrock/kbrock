@@ -128,9 +128,25 @@ end
 
 # --- stats SVG ---
 
+def total_svg(totals)
+  text = "#{format_count(totals[:contributions])} contributions in total"
+  w = 400
+  h = 20
+
+  lines = []
+  lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
+  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:16px;fill:#1f2328}</style>)
+  lines << %(<text x="0" y="15">#{text}</text>)
+  lines << %(</svg>)
+  lines.join("\n") + "\n"
+end
+
+def format_count(n)
+  n.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+end
+
 def stats_svg(totals)
-  # Diamond chart matching GitHub's activity overview layout
-  # Top: Code review, Right: Issues, Bottom: Pull requests, Left: Commits
+  # Diamond: top=Code review, right=Issues, bottom=Pull requests, left=Commits
   w = 300
   h = 220
   cx = w / 2.0
@@ -146,10 +162,10 @@ def stats_svg(totals)
   shape = dirs.each_with_index.map { |(dx, dy), i| [cx + dx * radius * norms[i], cy + dy * radius * norms[i]] }
 
   labels = [
-    { text: "Code review", count: totals[:reviews], x: cx,              y_count: cy - radius - 18, y_text: cy - radius - 6, anchor: "middle" },
-    { text: "Issues",      count: totals[:issues],  x: cx + radius + 8, y_count: cy - 2,           y_text: cy + 12,         anchor: "start" },
-    { text: "Pull requests", count: totals[:prs],   x: cx,              y_count: cy + radius + 14,  y_text: cy + radius + 28, anchor: "middle" },
-    { text: "Commits",     count: totals[:commits], x: cx - radius - 8, y_count: cy - 2,           y_text: cy + 12,         anchor: "end" },
+    { text: "Code review",   count: totals[:reviews], x: cx,               y_count: cy - radius - 18, y_text: cy - radius - 6, anchor: "middle" },
+    { text: "Issues",        count: totals[:issues],  x: cx + radius + 8,  y_count: cy - 2,           y_text: cy + 12,         anchor: "start" },
+    { text: "Pull requests", count: totals[:prs],     x: cx,               y_count: cy + radius + 14, y_text: cy + radius + 28, anchor: "middle" },
+    { text: "Commits",       count: totals[:commits], x: cx - radius - 8,  y_count: cy - 2,           y_text: cy + 12,         anchor: "end" },
   ]
 
   lines = []
@@ -179,10 +195,9 @@ def stats_svg(totals)
     lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#40c463" />)
   end
 
-  # Labels: count on one line, text on another
+  # Labels: count on one line, text below
   labels.each do |l|
-    formatted = l[:count].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-    lines << %(<text x="#{l[:x]}" y="#{l[:y_count]}" text-anchor="#{l[:anchor]}" class="count">#{formatted}</text>)
+    lines << %(<text x="#{l[:x]}" y="#{l[:y_count]}" text-anchor="#{l[:anchor]}" class="count">#{format_count(l[:count])}</text>)
     lines << %(<text x="#{l[:x]}" y="#{l[:y_text]}" text-anchor="#{l[:anchor]}">#{l[:text]}</text>)
   end
 
@@ -218,14 +233,14 @@ def update_readme(year_data, totals)
     return
   end
 
-  formatted_total = totals[:contributions].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-
   snippet = []
-  snippet << "#{formatted_total} contributions in total across #{totals[:repos]} repos"
+  snippet << %(<div style="border: 1px solid #d0d7de; border-radius: 6px; padding: 16px;">)
+  snippet << %(<img src="#{IMG_PREFIX}/total.svg" alt="#{format_count(totals[:contributions])} contributions in total" />)
   snippet << ""
   snippet << readme_snippet(year_data)
   snippet << ""
   snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  snippet << %(</div>)
 
   replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
@@ -250,6 +265,9 @@ def main
     File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0), first: (i == 0)))
     warn "  #{path}"
   end
+
+  File.write(File.join(OUT_DIR, "total.svg"), total_svg(totals))
+  warn "  total.svg"
 
   File.write(File.join(OUT_DIR, "stats.svg"), stats_svg(totals))
   warn "  stats.svg"
