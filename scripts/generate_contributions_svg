@@ -154,7 +154,7 @@ IMG_PREFIX = "images/contributions"
 
 def readme_snippet(year_data)
   lines = []
-  lines << %(<img src="#{IMG_PREFIX}/month-labels.svg" alt="" />)
+  lines << %(<a href="#"><img src="#{IMG_PREFIX}/month-labels.svg" alt="" /></a>)
 
   year_data.each do |year, months|
     total = (1..12).sum { |m| months[m] || 0 }
