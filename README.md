@@ -25,6 +25,24 @@
 <a href="https://github.com/kbrock?tab=overview&from=2025-01-01&to=2025-12-31" title="680 contributions in 2025"><img src="images/contributions/2025.svg" alt="2025" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2026-01-01&to=2026-12-31" title="417 contributions in 2026"><img src="images/contributions/2026.svg" alt="2026" /></a>
 
+<table><tr><td valign="top">
+
+**Contributed to**
+
+[manageiq](https://github.com/ManageIQ/manageiq) 3,091 commits
+[ancestry](https://github.com/stefankroes/ancestry) ![downloads](https://img.shields.io/gem/dt/ancestry?label=&color=brightgreen&style=flat-square) 610 commits
+[active_hash](https://github.com/active-hash/active_hash) ![downloads](https://img.shields.io/gem/dt/active_hash?label=&color=brightgreen&style=flat-square) 108 commits
+[optimist](https://github.com/ManageIQ/optimist) ![downloads](https://img.shields.io/gem/dt/optimist?label=&color=brightgreen&style=flat-square) 134 commits
+[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) ![downloads](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=&color=brightgreen&style=flat-square) 384 commits
+[floe](https://github.com/ManageIQ/floe) ![downloads](https://img.shields.io/gem/dt/floe?label=&color=brightgreen&style=flat-square) 247 commits
+[ruport](https://github.com/ruport/ruport) ![downloads](https://img.shields.io/gem/dt/ruport?label=&color=brightgreen&style=flat-square) 37 commits
+[rails](https://github.com/rails/rails) 21 commits
+and 260 other repositories
+
+</td><td>
+
 <img src="images/contributions/stats.svg" alt="Activity overview" />
+
+</td></tr></table>
 <!-- CONTRIBUTIONS END -->
 

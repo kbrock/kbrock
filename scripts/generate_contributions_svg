@@ -41,7 +41,7 @@ MONTH_NAMES = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
 
 def load_data
   years = {}
-  totals = { contributions: 0, commits: 0, prs: 0, reviews: 0, issues: 0, repos: Set.new }
+  totals = { contributions: 0, commits: 0, prs: 0, reviews: 0, issues: 0, repos: Set.new, repo_commits: Hash.new(0) }
 
   Dir.glob(File.join(DATA_DIR, "*.json")).sort.each do |f|
     year = File.basename(f, ".json").to_i
@@ -58,7 +58,11 @@ def load_data
     totals[:prs] += raw["totalPullRequestContributions"]
     totals[:reviews] += raw["totalPullRequestReviewContributions"]
     totals[:issues] += raw["totalIssueContributions"]
-    raw["commitContributionsByRepository"].each { |r| totals[:repos] << r["repository"]["nameWithOwner"] }
+    raw["commitContributionsByRepository"].each do |r|
+      name = r["repository"]["nameWithOwner"]
+      totals[:repos] << name
+      totals[:repo_commits][name] += r["contributions"]["totalCount"]
+    end
   end
 
   totals[:repos] = totals[:repos].size
@@ -220,6 +224,46 @@ def readme_snippet(year_data)
   lines.join("\n")
 end
 
+CURATED_REPOS = [
+  { name: "manageiq",            repo: "ManageIQ/manageiq",                          gem: nil },
+  { name: "ancestry",            repo: "stefankroes/ancestry",                       gem: "ancestry" },
+  { name: "active_hash",         repo: "active-hash/active_hash",                    gem: "active_hash" },
+  { name: "optimist",            repo: "ManageIQ/optimist",                          gem: "optimist" },
+  { name: "virtual_attributes",  repo: "ManageIQ/activerecord-virtual_attributes",   gem: "activerecord-virtual_attributes" },
+  { name: "floe",                repo: "ManageIQ/floe",                              gem: "floe" },
+  { name: "ruport",              repo: "ruport/ruport",                              gem: "ruport" },
+  { name: "rails",               repo: "rails/rails",                                gem: nil },
+]
+
+def activity_overview(totals)
+  lines = []
+  lines << %(<table><tr><td valign="top">)
+  lines << ""
+  lines << "**Contributed to**"
+  lines << ""
+
+  CURATED_REPOS.each do |r|
+    parts = []
+    parts << %([#{r[:name]}](https://github.com/#{r[:repo]}))
+    if r[:gem]
+      parts << %( ![downloads](https://img.shields.io/gem/dt/#{r[:gem]}?label=&color=brightgreen&style=flat-square))
+    end
+    count = totals[:repo_commits][r[:repo]]
+    parts << " #{format_count(count)} commits" if count && count > 0
+    lines << parts.join
+  end
+
+  other_count = totals[:repos] - CURATED_REPOS.length
+  lines << "and #{other_count} other repositories"
+  lines << ""
+  lines << %(</td><td>)
+  lines << ""
+  lines << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  lines << ""
+  lines << %(</td></tr></table>)
+  lines.join("\n")
+end
+
 README_PATH = File.expand_path("../README.md", __dir__)
 
 MARKER_BEGIN = "<!-- CONTRIBUTIONS BEGIN -->"
@@ -242,7 +286,7 @@ def update_readme(year_data, totals)
   snippet << ""
   snippet << readme_snippet(year_data)
   snippet << ""
-  snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  snippet << activity_overview(totals)
 
   replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
