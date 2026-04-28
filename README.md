@@ -27,14 +27,15 @@
 
 **Contributed to**
 
-[manageiq](https://github.com/ManageIQ/manageiq) 3,091 commits
-[ancestry](https://github.com/stefankroes/ancestry) ![downloads](https://img.shields.io/gem/dt/ancestry?label=&color=brightgreen&style=flat-square) 610 commits
-[active_hash](https://github.com/active-hash/active_hash) ![downloads](https://img.shields.io/gem/dt/active_hash?label=&color=brightgreen&style=flat-square) 108 commits
-[optimist](https://github.com/ManageIQ/optimist) ![downloads](https://img.shields.io/gem/dt/optimist?label=&color=brightgreen&style=flat-square) 134 commits
-[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) ![downloads](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=&color=brightgreen&style=flat-square) 384 commits
-[floe](https://github.com/ManageIQ/floe) ![downloads](https://img.shields.io/gem/dt/floe?label=&color=brightgreen&style=flat-square) 247 commits
-[ruport](https://github.com/ruport/ruport) ![downloads](https://img.shields.io/gem/dt/ruport?label=&color=brightgreen&style=flat-square) 37 commits
-[rails](https://github.com/rails/rails) 21 commits
+[manageiq](https://github.com/ManageIQ/manageiq) ![](https://img.shields.io/badge/3%2C091-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/ancestry?label=downloads&style=flat-square&color=brightgreen) [**ancestry**](https://github.com/stefankroes/ancestry) ![](https://img.shields.io/badge/610-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/active_hash?label=downloads&style=flat-square&color=brightgreen) [**active_hash**](https://github.com/active-hash/active_hash) ![](https://img.shields.io/badge/108-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/optimist?label=downloads&style=flat-square&color=brightgreen) [**optimist**](https://github.com/ManageIQ/optimist) ![](https://img.shields.io/badge/134-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=downloads&style=flat-square&color=brightgreen) [**virtual_attributes**](https://github.com/ManageIQ/activerecord-virtual_attributes) ![](https://img.shields.io/badge/384-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/floe?label=downloads&style=flat-square&color=brightgreen) [floe](https://github.com/ManageIQ/floe) ![](https://img.shields.io/badge/247-commits-blue?style=flat-square&logo=git&logoColor=white)
+![](https://img.shields.io/gem/dt/ruport?label=downloads&style=flat-square&color=brightgreen) [ruport](https://github.com/ruport/ruport) ![](https://img.shields.io/badge/37-commits-blue?style=flat-square&logo=git&logoColor=white)
+[rails](https://github.com/rails/rails) ![](https://img.shields.io/badge/21-commits-blue?style=flat-square&logo=git&logoColor=white)
+
 and 260 other repositories
 
 </td><td>

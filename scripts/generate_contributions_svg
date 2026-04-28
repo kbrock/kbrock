@@ -212,14 +212,14 @@ def readme_snippet(year_data)
 end
 
 CURATED_REPOS = [
-  { name: "manageiq",            repo: "ManageIQ/manageiq",                          gem: nil },
-  { name: "ancestry",            repo: "stefankroes/ancestry",                       gem: "ancestry" },
-  { name: "active_hash",         repo: "active-hash/active_hash",                    gem: "active_hash" },
-  { name: "optimist",            repo: "ManageIQ/optimist",                          gem: "optimist" },
-  { name: "virtual_attributes",  repo: "ManageIQ/activerecord-virtual_attributes",   gem: "activerecord-virtual_attributes" },
-  { name: "floe",                repo: "ManageIQ/floe",                              gem: "floe" },
-  { name: "ruport",              repo: "ruport/ruport",                              gem: "ruport" },
-  { name: "rails",               repo: "rails/rails",                                gem: nil },
+  { name: "manageiq",            repo: "ManageIQ/manageiq",                          gem: nil,                              maintain: false },
+  { name: "ancestry",            repo: "stefankroes/ancestry",                       gem: "ancestry",                       maintain: true },
+  { name: "active_hash",         repo: "active-hash/active_hash",                    gem: "active_hash",                    maintain: true },
+  { name: "optimist",            repo: "ManageIQ/optimist",                          gem: "optimist",                       maintain: true },
+  { name: "virtual_attributes",  repo: "ManageIQ/activerecord-virtual_attributes",   gem: "activerecord-virtual_attributes", maintain: true },
+  { name: "floe",                repo: "ManageIQ/floe",                              gem: "floe",                           maintain: false },
+  { name: "ruport",              repo: "ruport/ruport",                              gem: "ruport",                         maintain: false },
+  { name: "rails",               repo: "rails/rails",                                gem: nil,                              maintain: false },
 ]
 
 def activity_overview(totals)
@@ -228,18 +228,21 @@ def activity_overview(totals)
   lines << ""
   lines << "**Contributed to**"
   lines << ""
-
   CURATED_REPOS.each do |r|
-    parts = []
-    parts << %([#{r[:name]}](https://github.com/#{r[:repo]}))
+    count = totals[:repo_commits][r[:repo]] || 0
+    encoded_count = format_count(count).gsub(",", "%2C")
+    name = r[:maintain] ? "**#{r[:name]}**" : r[:name]
+    link = "[#{name}](https://github.com/#{r[:repo]})"
+    commit_badge = "![](https://img.shields.io/badge/#{encoded_count}-commits-blue?style=flat-square&logo=git&logoColor=white)"
     if r[:gem]
-      parts << %( ![downloads](https://img.shields.io/gem/dt/#{r[:gem]}?label=&color=brightgreen&style=flat-square))
+      dl_badge = "![](https://img.shields.io/gem/dt/#{r[:gem]}?label=downloads&style=flat-square&color=brightgreen)"
+      lines << "#{dl_badge} #{link} #{commit_badge}"
+    else
+      lines << "#{link} #{commit_badge}"
     end
-    count = totals[:repo_commits][r[:repo]]
-    parts << " #{format_count(count)} commits" if count && count > 0
-    lines << parts.join
   end
 
+  lines << ""
   other_count = totals[:repos] - CURATED_REPOS.length
   lines << "and #{other_count} other repositories"
   lines << ""
