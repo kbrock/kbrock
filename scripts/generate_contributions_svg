@@ -146,12 +146,13 @@ def format_count(n)
 end
 
 def stats_svg(totals)
-  # Diamond: top=Code review, right=Issues, bottom=Pull requests, left=Commits
+  # Diamond: top=Code reviews, right=Issues, bottom=Pull requests, left=Commits
   w = 300
-  h = 220
+  h = 230
   cx = w / 2.0
   cy = h / 2.0 + 5
-  radius = 65
+  radius = 70
+  font = 13
 
   # Order: top, right, bottom, left
   values = [totals[:reviews], totals[:issues], totals[:prs], totals[:commits]]
@@ -162,28 +163,27 @@ def stats_svg(totals)
   shape = dirs.each_with_index.map { |(dx, dy), i| [cx + dx * radius * norms[i], cy + dy * radius * norms[i]] }
 
   labels = [
-    { text: "Code review",   count: totals[:reviews], x: cx,               y_count: cy - radius - 18, y_text: cy - radius - 6, anchor: "middle" },
-    { text: "Issues",        count: totals[:issues],  x: cx + radius + 8,  y_count: cy - 2,           y_text: cy + 12,         anchor: "start" },
-    { text: "Pull requests", count: totals[:prs],     x: cx,               y_count: cy + radius + 14, y_text: cy + radius + 28, anchor: "middle" },
-    { text: "Commits",       count: totals[:commits], x: cx - radius - 8,  y_count: cy - 2,           y_text: cy + 12,         anchor: "end" },
+    { text: "Code reviews",  count: totals[:reviews], x: cx,               y_count: cy - radius - 20, y_text: cy - radius - 6, anchor: "middle" },
+    { text: "Issues",        count: totals[:issues],  x: cx + radius + 8,  y_count: cy - 2,           y_text: cy + 14,         anchor: "start" },
+    { text: "Pull requests", count: totals[:prs],     x: cx,               y_count: cy + radius + 16, y_text: cy + radius + 30, anchor: "middle" },
+    { text: "Commits",       count: totals[:commits], x: cx - radius - 8,  y_count: cy - 2,           y_text: cy + 14,         anchor: "end" },
   ]
 
   lines = []
   lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
   lines << %(<style>)
-  lines << %(  text { font-family: #{FONT_FAMILY}; font-size: #{FONT_SIZE}px; fill: #57606a; })
+  lines << %(  text { font-family: #{FONT_FAMILY}; font-size: #{font}px; fill: #57606a; })
   lines << %(  .count { font-weight: 600; })
   lines << %(</style>)
 
-  # Grid lines (diamond outline)
-  [0.33, 0.66, 1.0].each do |scale|
-    pts = dirs.map { |dx, dy| "#{cx + dx * radius * scale},#{cy + dy * radius * scale}" }.join(" ")
-    lines << %(<polygon points="#{pts}" fill="none" stroke="#ebedf0" stroke-width="1" />)
+  # Axis lines (dark green like GitHub's original)
+  dirs.each do |dx, dy|
+    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#30a14e" stroke-width="1.5" />)
   end
 
-  # Axis lines
+  # Axis endpoints
   dirs.each do |dx, dy|
-    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#ebedf0" stroke-width="1" />)
+    lines << %(<circle cx="#{cx + dx * radius}" cy="#{cy + dy * radius}" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />)
   end
 
   # Data shape
@@ -233,14 +233,16 @@ def update_readme(year_data, totals)
     return
   end
 
+  formatted_total = format_count(totals[:contributions])
+
   snippet = []
-  snippet << %(<div style="border: 1px solid #d0d7de; border-radius: 6px; padding: 16px;">)
-  snippet << %(<img src="#{IMG_PREFIX}/total.svg" alt="#{format_count(totals[:contributions])} contributions in total" />)
+  snippet << "#{formatted_total} contributions in total"
+  snippet << ""
+  snippet << %(<img src="#{IMG_PREFIX}/total.svg" alt="#{formatted_total} contributions in total" />)
   snippet << ""
   snippet << readme_snippet(year_data)
   snippet << ""
   snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
-  snippet << %(</div>)
 
   replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)

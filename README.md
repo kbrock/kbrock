@@ -1,7 +1,8 @@
 # <img src="images/gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan
 
 <!-- CONTRIBUTIONS BEGIN -->
-<div style="border: 1px solid #d0d7de; border-radius: 6px; padding: 16px;">
+14,306 contributions in total
+
 <img src="images/contributions/total.svg" alt="14,306 contributions in total" />
 
 <a href="https://github.com/kbrock?tab=overview&from=2008-01-01&to=2008-12-31" title="6 contributions in 2008"><img src="images/contributions/2008.svg" alt="2008" /></a>
@@ -25,6 +26,5 @@
 <a href="https://github.com/kbrock?tab=overview&from=2026-01-01&to=2026-12-31" title="417 contributions in 2026"><img src="images/contributions/2026.svg" alt="2026" /></a>
 
 <img src="images/contributions/stats.svg" alt="Activity overview" />
-</div>
 <!-- CONTRIBUTIONS END -->
 
