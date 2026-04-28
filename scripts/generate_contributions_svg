@@ -129,32 +129,27 @@ end
 # --- stats SVG ---
 
 def stats_svg(totals)
-  # Diamond chart like GitHub's activity overview, with counts instead of %
-  # 4 axes: Commits (top), Code review (right), Pull requests (bottom), Issues (left)
-  w = 240
-  h = 200
+  # Diamond chart matching GitHub's activity overview layout
+  # Top: Code review, Right: Issues, Bottom: Pull requests, Left: Commits
+  w = 300
+  h = 220
   cx = w / 2.0
   cy = h / 2.0 + 5
   radius = 65
 
-  values = [totals[:commits], totals[:reviews], totals[:prs], totals[:issues]]
+  # Order: top, right, bottom, left
+  values = [totals[:reviews], totals[:issues], totals[:prs], totals[:commits]]
   max_val = values.max.to_f
-  # Normalize to 0.15..1.0 range so even small values are visible
   norms = values.map { |v| v == 0 ? 0.0 : 0.15 + 0.85 * (v / max_val) }
 
-  # Axis directions: top, right, bottom, left
   dirs = [[0, -1], [1, 0], [0, 1], [-1, 0]]
-
-  # Diamond outline points (full radius)
-  outline = dirs.map { |dx, dy| [cx + dx * radius, cy + dy * radius] }
-  # Data shape points
   shape = dirs.each_with_index.map { |(dx, dy), i| [cx + dx * radius * norms[i], cy + dy * radius * norms[i]] }
 
   labels = [
-    { text: "Commits",        count: totals[:commits],  x: cx,          y: cy - radius - 12, anchor: "middle" },
-    { text: "Code review",    count: totals[:reviews],  x: cx + radius + 8, y: cy + 4,       anchor: "start" },
-    { text: "Pull requests",  count: totals[:prs],      x: cx,          y: cy + radius + 18, anchor: "middle" },
-    { text: "Issues",         count: totals[:issues],   x: cx - radius - 8, y: cy + 4,       anchor: "end" },
+    { text: "Code review", count: totals[:reviews], x: cx,              y_count: cy - radius - 18, y_text: cy - radius - 6, anchor: "middle" },
+    { text: "Issues",      count: totals[:issues],  x: cx + radius + 8, y_count: cy - 2,           y_text: cy + 12,         anchor: "start" },
+    { text: "Pull requests", count: totals[:prs],   x: cx,              y_count: cy + radius + 14,  y_text: cy + radius + 28, anchor: "middle" },
+    { text: "Commits",     count: totals[:commits], x: cx - radius - 8, y_count: cy - 2,           y_text: cy + 12,         anchor: "end" },
   ]
 
   lines = []
@@ -184,12 +179,11 @@ def stats_svg(totals)
     lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#40c463" />)
   end
 
-  # Labels with counts
+  # Labels: count on one line, text on another
   labels.each do |l|
     formatted = l[:count].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-    lines << %(<text x="#{l[:x]}" y="#{l[:y]}" text-anchor="#{l[:anchor]}">)
-    lines << %(  <tspan class="count">#{formatted}</tspan> #{l[:text]})
-    lines << %(</text>)
+    lines << %(<text x="#{l[:x]}" y="#{l[:y_count]}" text-anchor="#{l[:anchor]}" class="count">#{formatted}</text>)
+    lines << %(<text x="#{l[:x]}" y="#{l[:y_text]}" text-anchor="#{l[:anchor]}">#{l[:text]}</text>)
   end
 
   lines << %(</svg>)
@@ -213,30 +207,29 @@ end
 
 README_PATH = File.expand_path("../README.md", __dir__)
 
-def replace_block(content, name, snippet)
-  marker_begin = "<!-- #{name} BEGIN -->"
-  marker_end   = "<!-- #{name} END -->"
-  unless content.include?(marker_begin) && content.include?(marker_end)
-    warn "  README.md missing #{name} markers, skipping"
-    return content
-  end
-  content.sub(/#{Regexp.escape(marker_begin)}.*?#{Regexp.escape(marker_end)}/m,
-              "#{marker_begin}\n#{snippet}\n#{marker_end}")
-end
+MARKER_BEGIN = "<!-- CONTRIBUTIONS BEGIN -->"
+MARKER_END   = "<!-- CONTRIBUTIONS END -->"
 
 def update_readme(year_data, totals)
   content = File.read(README_PATH)
 
+  unless content.include?(MARKER_BEGIN) && content.include?(MARKER_END)
+    warn "  README.md missing CONTRIBUTIONS markers, skipping"
+    return
+  end
+
   formatted_total = totals[:contributions].to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
 
-  content = replace_block(content, "TOTAL",
-    "#{formatted_total} contributions in total across #{totals[:repos]} repos")
-  content = replace_block(content, "HEATMAP",
-    readme_snippet(year_data))
-  content = replace_block(content, "STATS",
-    %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />))
+  snippet = []
+  snippet << "#{formatted_total} contributions in total across #{totals[:repos]} repos"
+  snippet << ""
+  snippet << readme_snippet(year_data)
+  snippet << ""
+  snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
 
-  File.write(README_PATH, content)
+  replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
+  updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
+  File.write(README_PATH, updated)
   warn "  README.md updated"
 end
 
