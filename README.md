@@ -3,7 +3,6 @@
 ## Annual Contributions
 
 <!-- HEATMAP BEGIN -->
-<a href="#"><img src="images/contributions/month-labels.svg" alt="" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2008-01-01&to=2008-12-31" title="6 contributions in 2008"><img src="images/contributions/2008.svg" alt="2008" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2009-01-01&to=2009-12-31" title="41 contributions in 2009"><img src="images/contributions/2009.svg" alt="2009" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2010-01-01&to=2010-12-31" title="52 contributions in 2010"><img src="images/contributions/2010.svg" alt="2010" /></a>
@@ -20,5 +19,8 @@
 <a href="https://github.com/kbrock?tab=overview&from=2021-01-01&to=2021-12-31" title="890 contributions in 2021"><img src="images/contributions/2021.svg" alt="2021" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2022-01-01&to=2022-12-31" title="932 contributions in 2022"><img src="images/contributions/2022.svg" alt="2022" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2023-01-01&to=2023-12-31" title="1117 contributions in 2023"><img src="images/contributions/2023.svg" alt="2023" /></a>
+<a href="https://github.com/kbrock?tab=overview&from=2024-01-01&to=2024-12-31" title="1095 contributions in 2024"><img src="images/contributions/2024.svg" alt="2024" /></a>
+<a href="https://github.com/kbrock?tab=overview&from=2025-01-01&to=2025-12-31" title="680 contributions in 2025"><img src="images/contributions/2025.svg" alt="2025" /></a>
+<a href="https://github.com/kbrock?tab=overview&from=2026-01-01&to=2026-12-31" title="417 contributions in 2026"><img src="images/contributions/2026.svg" alt="2026" /></a>
 <!-- HEATMAP END -->
 

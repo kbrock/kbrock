@@ -77,15 +77,27 @@ end
 
 # --- SVG generators ---
 
-def year_svg(year, months, thresholds, show_label: false)
-  w = 2 * CELL_STEP - CELL_GAP
+MONTH_LABEL_WIDTH = 28
+
+def year_svg(year, months, thresholds, show_label: false, first: false)
+  cell_w = 2 * CELL_STEP - CELL_GAP
+  left = first ? MONTH_LABEL_WIDTH : 0
+  w = left + cell_w
   h = YEAR_LABEL_HEIGHT + 6 * CELL_STEP - CELL_GAP
 
   lines = []
   lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}" style="overflow:visible">)
   lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>)
+
+  if first
+    { 0 => "Jan", 2 => "Mar", 3 => "Oct", 5 => "Dec" }.each do |row, label|
+      y = YEAR_LABEL_HEIGHT + row * CELL_STEP + CELL_SIZE / 2 + 4
+      lines << %(<text x="0" y="#{y}">#{label}</text>)
+    end
+  end
+
   if show_label
-    lines << %(<text x="#{w / 2.0}" y="#{YEAR_LABEL_HEIGHT - 3}" text-anchor="middle">#{year}</text>)
+    lines << %(<text x="#{left + cell_w / 2.0}" y="#{YEAR_LABEL_HEIGHT - 3}" text-anchor="middle">#{year}</text>)
   end
 
   (1..12).each do |m|
@@ -93,7 +105,7 @@ def year_svg(year, months, thresholds, show_label: false)
     row = m <= 6 ? m - 1 : m - 7
     count = months[m] || 0
     color = COLORS[color_level(count, thresholds)]
-    x = col * CELL_STEP
+    x = left + col * CELL_STEP
     y = YEAR_LABEL_HEIGHT + row * CELL_STEP
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
     lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}"><title>#{escape_xml(tip)}</title></rect>)
@@ -103,59 +115,12 @@ def year_svg(year, months, thresholds, show_label: false)
   lines.join("\n") + "\n"
 end
 
-def month_labels_svg
-  h = YEAR_LABEL_HEIGHT + 6 * CELL_STEP - CELL_GAP
-  w = 28
-
-  lines = []
-  lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
-  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}</style>)
-
-  # H1 labels (Jan, Mar) and H2 labels (Oct, Dec)
-  { 0 => "Jan", 2 => "Mar", 3 => "Oct", 5 => "Dec" }.each do |row, label|
-    y = YEAR_LABEL_HEIGHT + row * CELL_STEP + CELL_SIZE / 2 + 4
-    lines << %(<text x="0" y="#{y}">#{label}</text>)
-  end
-
-  lines << %(</svg>)
-  lines.join("\n") + "\n"
-end
-
-# --- HTML output ---
-
-def preview_html(year_data)
-  lines = []
-  lines << %(<!DOCTYPE html>)
-  lines << %(<html><head><meta charset="utf-8"><title>Contributions</title>)
-  lines << %(<style>)
-  lines << %(body{font-family:#{FONT_FAMILY};background:#fff;padding:20px})
-  lines << %(.heatmap{display:flex;align-items:flex-start;gap:2px})
-  lines << %(.heatmap a{display:inline-block;text-decoration:none})
-  lines << %(.heatmap img{display:block})
-  lines << %(</style>)
-  lines << %(</head><body>)
-  lines << %(<div class="heatmap">)
-  lines << %(<img src="month-labels.svg" alt="" />)
-
-  year_data.each do |year, months|
-    total = (1..12).sum { |m| months[m] || 0 }
-    url = "https://github.com/kbrock?tab=overview&amp;from=#{year}-01-01&amp;to=#{year}-12-31"
-    lines << %(<a href="#{url}" title="#{total} contributions in #{year}"><img src="#{year}.svg" alt="#{year}" /></a>)
-  end
-
-  lines << %(</div>)
-  lines << %(</body></html>)
-  lines.join("\n") + "\n"
-end
-
 # --- README snippet ---
 
 IMG_PREFIX = "images/contributions"
 
 def readme_snippet(year_data)
   lines = []
-  lines << %(<a href="#"><img src="#{IMG_PREFIX}/month-labels.svg" alt="" /></a>)
-
   year_data.each do |year, months|
     total = (1..12).sum { |m| months[m] || 0 }
     url = "https://github.com/kbrock?tab=overview&from=#{year}-01-01&to=#{year}-12-31"
@@ -198,15 +163,9 @@ def main
 
   year_data.each_with_index do |(year, months), i|
     path = File.join(OUT_DIR, "#{year}.svg")
-    File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0)))
+    File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0), first: (i == 0)))
     warn "  #{path}"
   end
-
-  File.write(File.join(OUT_DIR, "month-labels.svg"), month_labels_svg)
-  warn "  month-labels.svg"
-
-  File.write(File.join(OUT_DIR, "preview.html"), preview_html(year_data))
-  warn "  preview.html"
 
   update_readme(year_data)
 
