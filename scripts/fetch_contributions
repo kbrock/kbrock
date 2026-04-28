@@ -1,0 +1,163 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Fetch GitHub contribution data per year using the GraphQL API.
+# Stores one JSON file per year in images/contributions/data/YYYY.json.
+#
+# Re-run behavior:
+#   - Always re-fetches the current year (incomplete).
+#   - Re-fetches the last previously-fetched year (may have been incomplete).
+#   - Skips years that already have data and are older than the last fetched year.
+#
+# Usage:
+#   ruby scripts/fetch_contributions.rb [--all] [--user USER] [--since YEAR]
+#
+#   --all    Force re-download of all years
+#   --user   GitHub username (default: kbrock)
+#   --since  First year to fetch (default: 2008)
+
+require "json"
+require "time"
+require "open3"
+require "fileutils"
+
+DATA_DIR = File.expand_path("../images/contributions/data", __dir__)
+
+QUERY = <<~GRAPHQL
+  query($login: String!, $from: DateTime!, $to: DateTime!) {
+    user(login: $login) {
+      contributionsCollection(from: $from, to: $to) {
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              date
+              contributionCount
+            }
+          }
+        }
+        totalCommitContributions
+        totalPullRequestContributions
+        totalPullRequestReviewContributions
+        totalIssueContributions
+        totalRepositoriesWithContributedCommits
+        commitContributionsByRepository(maxRepositories: 100) {
+          repository { nameWithOwner }
+          contributions { totalCount }
+        }
+      }
+    }
+    rateLimit {
+      remaining
+      resetAt
+    }
+  }
+GRAPHQL
+
+def parse_args(argv)
+  opts = { user: "kbrock", since: 2008, all: false }
+  i = 0
+  while i < argv.length
+    case argv[i]
+    when "--all"   then opts[:all] = true
+    when "--user"  then i += 1; opts[:user] = argv[i]
+    when "--since" then i += 1; opts[:since] = argv[i].to_i
+    else
+      warn "Unknown option: #{argv[i]}"
+      exit 1
+    end
+    i += 1
+  end
+  opts
+end
+
+def fetch_year(user, year)
+  from = "#{year}-01-01T00:00:00Z"
+  to   = "#{year}-12-31T23:59:59Z"
+
+  cmd = ["gh", "api", "graphql",
+         "-f", "query=#{QUERY}",
+         "-f", "login=#{user}",
+         "-f", "from=#{from}",
+         "-f", "to=#{to}"]
+
+  stdout, stderr, status = Open3.capture3(*cmd)
+
+  unless status.success?
+    warn "gh api failed for #{year}: #{stderr}"
+    return nil
+  end
+
+  data = JSON.parse(stdout)
+
+  if (errors = data["errors"])
+    warn "GraphQL errors for #{year}: #{errors.map { |e| e["message"] }.join(", ")}"
+    return nil
+  end
+
+  rate = data.dig("data", "rateLimit")
+  if rate
+    remaining = rate["remaining"]
+    warn "  Rate limit remaining: #{remaining}"
+    if remaining < 100
+      reset_at = Time.parse(rate["resetAt"])
+      wait = [reset_at - Time.now, 0].max.ceil + 1
+      warn "  Rate limit low. Sleeping #{wait}s until #{rate["resetAt"]}"
+      sleep(wait)
+    end
+  end
+
+  data.dig("data", "user", "contributionsCollection")
+end
+
+def existing_years
+  Dir.glob(File.join(DATA_DIR, "*.json")).map { |f|
+    File.basename(f, ".json").to_i
+  }.sort
+end
+
+def years_to_fetch(opts)
+  current_year = Time.now.year
+  all_years = (opts[:since]..current_year).to_a
+
+  return all_years if opts[:all]
+
+  existing = existing_years
+  return all_years if existing.empty?
+
+  last_fetched = existing.max
+  # Always re-fetch: last fetched year + current year + any missing gaps
+  missing = all_years - existing
+  refetch = [last_fetched, current_year].uniq
+  (missing + refetch).uniq.sort
+end
+
+def save_year(year, data)
+  FileUtils.mkdir_p(DATA_DIR)
+  path = File.join(DATA_DIR, "#{year}.json")
+  File.write(path, JSON.pretty_generate(data))
+  warn "  Saved #{path}"
+end
+
+def main
+  opts = parse_args(ARGV)
+  to_fetch = years_to_fetch(opts)
+
+  warn "Will fetch: #{to_fetch.join(", ")}"
+  warn ""
+
+  to_fetch.each do |year|
+    warn "Fetching #{year}..."
+    data = fetch_year(opts[:user], year)
+    if data
+      save_year(year, data)
+    else
+      warn "  FAILED for #{year}, skipping"
+    end
+  end
+
+  warn ""
+  warn "Done. #{to_fetch.length} year(s) fetched."
+end
+
+main
