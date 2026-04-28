@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="115" viewBox="0 0 31 115" style="overflow:visible">
 <style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:11px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>
 <text x="15.5" y="13" text-anchor="middle">2016</text>
-<rect class="c" x="0" y="16" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>193 contributions in Jan 2016</title></rect>
-<rect class="c" x="0" y="33" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>146 contributions in Feb 2016</title></rect>
-<rect class="c" x="0" y="50" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>179 contributions in Mar 2016</title></rect>
-<rect class="c" x="0" y="67" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>252 contributions in Apr 2016</title></rect>
-<rect class="c" x="0" y="84" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>210 contributions in May 2016</title></rect>
-<rect class="c" x="0" y="101" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>167 contributions in Jun 2016</title></rect>
-<rect class="c" x="17" y="16" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>168 contributions in Jul 2016</title></rect>
-<rect class="c" x="17" y="33" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>189 contributions in Aug 2016</title></rect>
-<rect class="c" x="17" y="50" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>151 contributions in Sep 2016</title></rect>
-<rect class="c" x="17" y="67" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>114 contributions in Oct 2016</title></rect>
-<rect class="c" x="17" y="84" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>64 contributions in Nov 2016</title></rect>
-<rect class="c" x="17" y="101" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>105 contributions in Dec 2016</title></rect>
+<rect class="c" x="0" y="16" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>193 contributions in Jan 2016</title></rect>
+<rect class="c" x="0" y="33" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>146 contributions in Feb 2016</title></rect>
+<rect class="c" x="0" y="50" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>179 contributions in Mar 2016</title></rect>
+<rect class="c" x="0" y="67" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>252 contributions in Apr 2016</title></rect>
+<rect class="c" x="0" y="84" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>210 contributions in May 2016</title></rect>
+<rect class="c" x="0" y="101" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>167 contributions in Jun 2016</title></rect>
+<rect class="c" x="17" y="16" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>168 contributions in Jul 2016</title></rect>
+<rect class="c" x="17" y="33" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>189 contributions in Aug 2016</title></rect>
+<rect class="c" x="17" y="50" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>151 contributions in Sep 2016</title></rect>
+<rect class="c" x="17" y="67" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>114 contributions in Oct 2016</title></rect>
+<rect class="c" x="17" y="84" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>64 contributions in Nov 2016</title></rect>
+<rect class="c" x="17" y="101" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>105 contributions in Dec 2016</title></rect>
 </svg>

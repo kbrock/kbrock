@@ -123,7 +123,7 @@ def year_svg(year, months, thresholds, show_label: false, first: false)
     x = left + col * CELL_STEP
     y = YEAR_LABEL_HEIGHT + row * CELL_STEP
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
-    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}"><title>#{escape_xml(tip)}</title></rect>)
+    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="4" ry="4" fill="#{color}" stroke="#1f28280d" stroke-width="0.5"><title>#{escape_xml(tip)}</title></rect>)
   end
 
   lines << %(</svg>)
@@ -138,11 +138,11 @@ end
 
 def stats_svg(totals)
   # Diamond: top=Code reviews, right=Issues, bottom=Pull requests, left=Commits
-  w = 300
-  h = 230
+  w = 340
+  h = 260
   cx = w / 2.0
   cy = h / 2.0 + 5
-  radius = 70
+  radius = 80
   font = 13
 
   # Order: top, right, bottom, left
@@ -222,28 +222,36 @@ CURATED_REPOS = [
   { name: "rails",               repo: "rails/rails",                                gem: nil,                              maintain: false },
 ]
 
+GEM_ICON = "images/gem.svg"
+
+def project_badge(r, totals)
+  count = totals[:repo_commits][r[:repo]] || 0
+  encoded_count = format_count(count).gsub(",", "%2C")
+  if r[:maintain] && r[:gem]
+    "![](https://img.shields.io/gem/dt/#{r[:gem]}?label=downloads&style=flat-square&color=brightgreen)"
+  else
+    "![](https://img.shields.io/badge/#{encoded_count}-commits-blue?style=flat-square&logo=git&logoColor=white)"
+  end
+end
+
+def project_link(r)
+  "[#{r[:name]}](https://github.com/#{r[:repo]})"
+end
+
+def gem_icon(r)
+  r[:maintain] ? %(<img src="#{GEM_ICON}" width="12" alt="maintainer" />) : ""
+end
+
 def activity_overview(totals)
+  other_count = totals[:repos] - CURATED_REPOS.length
+
   lines = []
   lines << %(<table><tr><td valign="top">)
   lines << ""
   lines << "**Contributed to**"
-  lines << ""
   CURATED_REPOS.each do |r|
-    count = totals[:repo_commits][r[:repo]] || 0
-    encoded_count = format_count(count).gsub(",", "%2C")
-    name = r[:maintain] ? "**#{r[:name]}**" : r[:name]
-    link = "[#{name}](https://github.com/#{r[:repo]})"
-    commit_badge = "![](https://img.shields.io/badge/#{encoded_count}-commits-blue?style=flat-square&logo=git&logoColor=white)"
-    if r[:gem]
-      dl_badge = "![](https://img.shields.io/gem/dt/#{r[:gem]}?label=downloads&style=flat-square&color=brightgreen)"
-      lines << "#{dl_badge} #{link} #{commit_badge}"
-    else
-      lines << "#{link} #{commit_badge}"
-    end
+    lines << "#{gem_icon(r)} #{project_link(r)}"
   end
-
-  lines << ""
-  other_count = totals[:repos] - CURATED_REPOS.length
   lines << "and #{other_count} other repositories"
   lines << ""
   lines << %(</td><td>)
@@ -251,6 +259,27 @@ def activity_overview(totals)
   lines << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
   lines << ""
   lines << %(</td></tr></table>)
+  lines << ""
+
+  # --- comparison: p list ---
+  lines << "**Projects** (p list)"
+  lines << ""
+  CURATED_REPOS.each do |r|
+    lines << "#{gem_icon(r)} #{project_link(r)} #{project_badge(r, totals)}"
+  end
+  lines << "and #{other_count} other repositories"
+  lines << ""
+
+  # --- comparison: table list ---
+  lines << "**Projects** (table)"
+  lines << ""
+  lines << "| | Project | |"
+  lines << "|:-|---------|:-|"
+  CURATED_REPOS.each do |r|
+    lines << "| #{gem_icon(r)} | #{project_link(r)} | #{project_badge(r, totals)} |"
+  end
+  lines << "| | and #{other_count} other repositories | |"
+
   lines.join("\n")
 end
 

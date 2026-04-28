@@ -1,15 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="115" viewBox="0 0 31 115" style="overflow:visible">
 <style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:11px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>
-<rect class="c" x="0" y="16" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>118 contributions in Jan 2017</title></rect>
-<rect class="c" x="0" y="33" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>109 contributions in Feb 2017</title></rect>
-<rect class="c" x="0" y="50" width="14" height="14" rx="2" ry="2" fill="#216e39"><title>115 contributions in Mar 2017</title></rect>
-<rect class="c" x="0" y="67" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>69 contributions in Apr 2017</title></rect>
-<rect class="c" x="0" y="84" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>91 contributions in May 2017</title></rect>
-<rect class="c" x="0" y="101" width="14" height="14" rx="2" ry="2" fill="#40c463"><title>44 contributions in Jun 2017</title></rect>
-<rect class="c" x="17" y="16" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>58 contributions in Jul 2017</title></rect>
-<rect class="c" x="17" y="33" width="14" height="14" rx="2" ry="2" fill="#30a14e"><title>59 contributions in Aug 2017</title></rect>
-<rect class="c" x="17" y="50" width="14" height="14" rx="2" ry="2" fill="#9be9a8"><title>18 contributions in Sep 2017</title></rect>
-<rect class="c" x="17" y="67" width="14" height="14" rx="2" ry="2" fill="#9be9a8"><title>18 contributions in Oct 2017</title></rect>
-<rect class="c" x="17" y="84" width="14" height="14" rx="2" ry="2" fill="#40c463"><title>31 contributions in Nov 2017</title></rect>
-<rect class="c" x="17" y="101" width="14" height="14" rx="2" ry="2" fill="#40c463"><title>40 contributions in Dec 2017</title></rect>
+<rect class="c" x="0" y="16" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>118 contributions in Jan 2017</title></rect>
+<rect class="c" x="0" y="33" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>109 contributions in Feb 2017</title></rect>
+<rect class="c" x="0" y="50" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>115 contributions in Mar 2017</title></rect>
+<rect class="c" x="0" y="67" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>69 contributions in Apr 2017</title></rect>
+<rect class="c" x="0" y="84" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>91 contributions in May 2017</title></rect>
+<rect class="c" x="0" y="101" width="14" height="14" rx="4" ry="4" fill="#40c463" stroke="#1f28280d" stroke-width="0.5"><title>44 contributions in Jun 2017</title></rect>
+<rect class="c" x="17" y="16" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>58 contributions in Jul 2017</title></rect>
+<rect class="c" x="17" y="33" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>59 contributions in Aug 2017</title></rect>
+<rect class="c" x="17" y="50" width="14" height="14" rx="4" ry="4" fill="#9be9a8" stroke="#1f28280d" stroke-width="0.5"><title>18 contributions in Sep 2017</title></rect>
+<rect class="c" x="17" y="67" width="14" height="14" rx="4" ry="4" fill="#9be9a8" stroke="#1f28280d" stroke-width="0.5"><title>18 contributions in Oct 2017</title></rect>
+<rect class="c" x="17" y="84" width="14" height="14" rx="4" ry="4" fill="#40c463" stroke="#1f28280d" stroke-width="0.5"><title>31 contributions in Nov 2017</title></rect>
+<rect class="c" x="17" y="101" width="14" height="14" rx="4" ry="4" fill="#40c463" stroke="#1f28280d" stroke-width="0.5"><title>40 contributions in Dec 2017</title></rect>
 </svg>
