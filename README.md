@@ -1,4 +1,4 @@
-# <img src="gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan
+# <img src="images/gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan
 
 ## What I maintain
 
