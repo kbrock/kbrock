@@ -1,0 +1,34 @@
+name: Update contribution heatmap
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'  # 1st of each month at 9am UTC
+  workflow_dispatch:       # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+
+      - name: Fetch contributions
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ruby scripts/fetch_contributions
+
+      - name: Generate SVGs and update README
+        run: ruby scripts/generate_contributions_svg
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "kbrock-bot"
+          git config user.email "bot@thebrocks.net"
+          git add images/contributions/ README.md
+          git diff --staged --quiet || git commit -m "Update contribution heatmap" && git push
