@@ -304,15 +304,15 @@ def update_readme(year_data, totals)
   snippet << %(</table>)
   snippet << ""
 
-  # Projects table below
-  sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
-  snippet << "| Project | Commits | Downloads |"
-  snippet << "|---------|--------:|----------:|"
-  sorted.each do |r|
-    icon = r[:maintain] ? " #{GEM_ICON}" : ""
-    snippet << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
-  end
-  snippet << "| and #{other_count} other repositories | | |"
+  # Projects table below (uncomment to include)
+  # sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
+  # snippet << "| Project | Commits | Downloads |"
+  # snippet << "|---------|--------:|----------:|"
+  # sorted.each do |r|
+  #   icon = r[:maintain] ? " #{GEM_ICON}" : ""
+  #   snippet << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
+  # end
+  # snippet << "| and #{other_count} other repositories | | |"
 
   replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)

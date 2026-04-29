@@ -46,16 +46,5 @@ and 260 other repositories
 </td></tr>
 </table>
 
-| Project | Commits | Downloads |
-|---------|--------:|----------:|
-| [manageiq](https://github.com/ManageIQ/manageiq) | ![3,091 commits](https://img.shields.io/github/commit-activity/t/ManageIQ/manageiq?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) |  |
-| [ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![610 commits](https://img.shields.io/github/commit-activity/t/stefankroes/ancestry?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![ancestry downloads](https://img.shields.io/gem/dt/ancestry?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![384 commits](https://img.shields.io/github/commit-activity/t/ManageIQ/activerecord-virtual_attributes?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![virtual_attributes downloads](https://img.shields.io/gem/dt/activerecord-virtual_attributes?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [floe](https://github.com/ManageIQ/floe) | ![247 commits](https://img.shields.io/github/commit-activity/t/ManageIQ/floe?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![floe downloads](https://img.shields.io/gem/dt/floe?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![134 commits](https://img.shields.io/github/commit-activity/t/ManageIQ/optimist?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![optimist downloads](https://img.shields.io/gem/dt/optimist?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![108 commits](https://img.shields.io/github/commit-activity/t/active-hash/active_hash?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![active_hash downloads](https://img.shields.io/gem/dt/active_hash?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [ruport](https://github.com/ruport/ruport) | ![37 commits](https://img.shields.io/github/commit-activity/t/ruport/ruport?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) | ![ruport downloads](https://img.shields.io/gem/dt/ruport?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen) |
-| [rails](https://github.com/rails/rails) | ![21 commits](https://img.shields.io/github/commit-activity/t/rails/rails?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square) |  |
-| and 260 other repositories | | |
 <!-- CONTRIBUTIONS END -->
 
