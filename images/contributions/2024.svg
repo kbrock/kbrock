@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="115" viewBox="0 0 31 115" style="overflow:visible">
 <style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:11px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>
 <text x="15.5" y="13" text-anchor="middle">2024</text>
-<rect class="c" x="0" y="16" width="14" height="14" rx="4" ry="4" fill="#40c463" stroke="#1f28280d" stroke-width="0.5"><title>55 contributions in Jan 2024</title></rect>
-<rect class="c" x="0" y="33" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>118 contributions in Feb 2024</title></rect>
-<rect class="c" x="0" y="50" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>81 contributions in Mar 2024</title></rect>
-<rect class="c" x="0" y="67" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>65 contributions in Apr 2024</title></rect>
-<rect class="c" x="0" y="84" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>116 contributions in May 2024</title></rect>
-<rect class="c" x="0" y="101" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>103 contributions in Jun 2024</title></rect>
-<rect class="c" x="17" y="16" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>142 contributions in Jul 2024</title></rect>
-<rect class="c" x="17" y="33" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>87 contributions in Aug 2024</title></rect>
-<rect class="c" x="17" y="50" width="14" height="14" rx="4" ry="4" fill="#216e39" stroke="#1f28280d" stroke-width="0.5"><title>157 contributions in Sep 2024</title></rect>
-<rect class="c" x="17" y="67" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>100 contributions in Oct 2024</title></rect>
-<rect class="c" x="17" y="84" width="14" height="14" rx="4" ry="4" fill="#30a14e" stroke="#1f28280d" stroke-width="0.5"><title>58 contributions in Nov 2024</title></rect>
-<rect class="c" x="17" y="101" width="14" height="14" rx="4" ry="4" fill="#9be9a8" stroke="#1f28280d" stroke-width="0.5"><title>13 contributions in Dec 2024</title></rect>
+<rect class="c" x="0" y="16" width="14" height="14" rx="2" ry="2" fill="#40c463" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>55 contributions in Jan 2024</title></rect>
+<rect class="c" x="0" y="33" width="14" height="14" rx="2" ry="2" fill="#216e39" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>118 contributions in Feb 2024</title></rect>
+<rect class="c" x="0" y="50" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>81 contributions in Mar 2024</title></rect>
+<rect class="c" x="0" y="67" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>65 contributions in Apr 2024</title></rect>
+<rect class="c" x="0" y="84" width="14" height="14" rx="2" ry="2" fill="#216e39" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>116 contributions in May 2024</title></rect>
+<rect class="c" x="0" y="101" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>103 contributions in Jun 2024</title></rect>
+<rect class="c" x="17" y="16" width="14" height="14" rx="2" ry="2" fill="#216e39" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>142 contributions in Jul 2024</title></rect>
+<rect class="c" x="17" y="33" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>87 contributions in Aug 2024</title></rect>
+<rect class="c" x="17" y="50" width="14" height="14" rx="2" ry="2" fill="#216e39" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>157 contributions in Sep 2024</title></rect>
+<rect class="c" x="17" y="67" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>100 contributions in Oct 2024</title></rect>
+<rect class="c" x="17" y="84" width="14" height="14" rx="2" ry="2" fill="#30a14e" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>58 contributions in Nov 2024</title></rect>
+<rect class="c" x="17" y="101" width="14" height="14" rx="2" ry="2" fill="#9be9a8" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>13 contributions in Dec 2024</title></rect>
 </svg>

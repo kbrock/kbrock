@@ -25,15 +25,15 @@
 
 <table><tr><td valign="top">
 
-**Contributed to**
- [manageiq](https://github.com/ManageIQ/manageiq)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [ancestry](https://github.com/stefankroes/ancestry)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [active_hash](https://github.com/active-hash/active_hash)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [optimist](https://github.com/ManageIQ/optimist)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes)
- [floe](https://github.com/ManageIQ/floe)
- [ruport](https://github.com/ruport/ruport)
- [rails](https://github.com/rails/rails)
+Contributed to<br>
+[manageiq](https://github.com/ManageIQ/manageiq),<br>
+[ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[floe](https://github.com/ManageIQ/floe),<br>
+[ruport](https://github.com/ruport/ruport),<br>
+[rails](https://github.com/rails/rails),<br>
 and 260 other repositories
 
 </td><td>
@@ -44,28 +44,30 @@ and 260 other repositories
 
 **Projects** (p list)
 
- [manageiq](https://github.com/ManageIQ/manageiq) ![](https://img.shields.io/badge/3%2C091-commits-blue?style=flat-square&logo=git&logoColor=white)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [ancestry](https://github.com/stefankroes/ancestry) ![](https://img.shields.io/gem/dt/ancestry?label=downloads&style=flat-square&color=brightgreen)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [active_hash](https://github.com/active-hash/active_hash) ![](https://img.shields.io/gem/dt/active_hash?label=downloads&style=flat-square&color=brightgreen)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [optimist](https://github.com/ManageIQ/optimist) ![](https://img.shields.io/gem/dt/optimist?label=downloads&style=flat-square&color=brightgreen)
-<img src="images/gem.svg" width="12" alt="maintainer" /> [virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) ![](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=downloads&style=flat-square&color=brightgreen)
- [floe](https://github.com/ManageIQ/floe) ![](https://img.shields.io/badge/247-commits-blue?style=flat-square&logo=git&logoColor=white)
- [ruport](https://github.com/ruport/ruport) ![](https://img.shields.io/badge/37-commits-blue?style=flat-square&logo=git&logoColor=white)
- [rails](https://github.com/rails/rails) ![](https://img.shields.io/badge/21-commits-blue?style=flat-square&logo=git&logoColor=white)
+<p>
+[ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" /> ![](https://img.shields.io/badge/610-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/ancestry?label=downloads&style=flat-square&color=brightgreen)<br>
+[active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" /> ![](https://img.shields.io/badge/108-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/active_hash?label=downloads&style=flat-square&color=brightgreen)<br>
+[optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" /> ![](https://img.shields.io/badge/134-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/optimist?label=downloads&style=flat-square&color=brightgreen)<br>
+[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" /> ![](https://img.shields.io/badge/384-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=downloads&style=flat-square&color=brightgreen)<br>
+[floe](https://github.com/ManageIQ/floe) ![](https://img.shields.io/badge/247-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/floe?label=downloads&style=flat-square&color=brightgreen)<br>
+[ruport](https://github.com/ruport/ruport) ![](https://img.shields.io/badge/37-commits-blue?style=flat-square&logo=git&logoColor=white) ![](https://img.shields.io/gem/dt/ruport?label=downloads&style=flat-square&color=brightgreen)<br>
+[manageiq](https://github.com/ManageIQ/manageiq) ![](https://img.shields.io/badge/3%2C091-commits-blue?style=flat-square&logo=git&logoColor=white) <br>
+[rails](https://github.com/rails/rails) ![](https://img.shields.io/badge/21-commits-blue?style=flat-square&logo=git&logoColor=white) <br>
 and 260 other repositories
+</p>
 
 **Projects** (table)
 
-| | Project | |
-|:-|---------|:-|
-|  | [manageiq](https://github.com/ManageIQ/manageiq) | ![](https://img.shields.io/badge/3%2C091-commits-blue?style=flat-square&logo=git&logoColor=white) |
-| <img src="images/gem.svg" width="12" alt="maintainer" /> | [ancestry](https://github.com/stefankroes/ancestry) | ![](https://img.shields.io/gem/dt/ancestry?label=downloads&style=flat-square&color=brightgreen) |
-| <img src="images/gem.svg" width="12" alt="maintainer" /> | [active_hash](https://github.com/active-hash/active_hash) | ![](https://img.shields.io/gem/dt/active_hash?label=downloads&style=flat-square&color=brightgreen) |
-| <img src="images/gem.svg" width="12" alt="maintainer" /> | [optimist](https://github.com/ManageIQ/optimist) | ![](https://img.shields.io/gem/dt/optimist?label=downloads&style=flat-square&color=brightgreen) |
-| <img src="images/gem.svg" width="12" alt="maintainer" /> | [virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) | ![](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=downloads&style=flat-square&color=brightgreen) |
-|  | [floe](https://github.com/ManageIQ/floe) | ![](https://img.shields.io/badge/247-commits-blue?style=flat-square&logo=git&logoColor=white) |
-|  | [ruport](https://github.com/ruport/ruport) | ![](https://img.shields.io/badge/37-commits-blue?style=flat-square&logo=git&logoColor=white) |
-|  | [rails](https://github.com/rails/rails) | ![](https://img.shields.io/badge/21-commits-blue?style=flat-square&logo=git&logoColor=white) |
-| | and 260 other repositories | |
+| Project | Commits | Downloads |
+|---------|--------:|----------:|
+| [ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![](https://img.shields.io/badge/610-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/ancestry?label=downloads&style=flat-square&color=brightgreen) |
+| [active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![](https://img.shields.io/badge/108-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/active_hash?label=downloads&style=flat-square&color=brightgreen) |
+| [optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![](https://img.shields.io/badge/134-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/optimist?label=downloads&style=flat-square&color=brightgreen) |
+| [virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" /> | ![](https://img.shields.io/badge/384-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/activerecord-virtual_attributes?label=downloads&style=flat-square&color=brightgreen) |
+| [floe](https://github.com/ManageIQ/floe) | ![](https://img.shields.io/badge/247-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/floe?label=downloads&style=flat-square&color=brightgreen) |
+| [ruport](https://github.com/ruport/ruport) | ![](https://img.shields.io/badge/37-commits-blue?style=flat-square&logo=git&logoColor=white) | ![](https://img.shields.io/gem/dt/ruport?label=downloads&style=flat-square&color=brightgreen) |
+| [manageiq](https://github.com/ManageIQ/manageiq) | ![](https://img.shields.io/badge/3%2C091-commits-blue?style=flat-square&logo=git&logoColor=white) |  |
+| [rails](https://github.com/rails/rails) | ![](https://img.shields.io/badge/21-commits-blue?style=flat-square&logo=git&logoColor=white) |  |
+| and 260 other repositories | | |
 <!-- CONTRIBUTIONS END -->
 
