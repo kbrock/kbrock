@@ -1,16 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="31" height="115" viewBox="0 0 31 115" style="overflow:visible">
+<svg xmlns="http://www.w3.org/2000/svg" width="59" height="115" viewBox="0 0 59 115" style="overflow:visible">
 <style>text{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;font-size:11px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>
-<text x="15.5" y="13" text-anchor="middle">2008</text>
-<rect class="c" x="0" y="16" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Jan 2008</title></rect>
-<rect class="c" x="0" y="33" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Feb 2008</title></rect>
-<rect class="c" x="0" y="50" width="14" height="14" rx="2" ry="2" fill="#9be9a8"><title>1 contribution in Mar 2008</title></rect>
-<rect class="c" x="0" y="67" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Apr 2008</title></rect>
-<rect class="c" x="0" y="84" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in May 2008</title></rect>
-<rect class="c" x="0" y="101" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Jun 2008</title></rect>
-<rect class="c" x="17" y="16" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Jul 2008</title></rect>
-<rect class="c" x="17" y="33" width="14" height="14" rx="2" ry="2" fill="#9be9a8"><title>5 contributions in Aug 2008</title></rect>
-<rect class="c" x="17" y="50" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Sep 2008</title></rect>
-<rect class="c" x="17" y="67" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Oct 2008</title></rect>
-<rect class="c" x="17" y="84" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Nov 2008</title></rect>
-<rect class="c" x="17" y="101" width="14" height="14" rx="2" ry="2" fill="#ebedf0"><title>0 contributions in Dec 2008</title></rect>
+<text x="0" y="27">Jan</text>
+<text x="0" y="61">Mar</text>
+<text x="0" y="78">Oct</text>
+<text x="0" y="112">Dec</text>
+<text x="43.5" y="13" text-anchor="middle">2008</text>
+<rect class="c" x="28" y="16" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Jan 2008</title></rect>
+<rect class="c" x="28" y="33" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Feb 2008</title></rect>
+<rect class="c" x="28" y="50" width="14" height="14" rx="2" ry="2" fill="#9be9a8" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>1 contribution in Mar 2008</title></rect>
+<rect class="c" x="28" y="67" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Apr 2008</title></rect>
+<rect class="c" x="28" y="84" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in May 2008</title></rect>
+<rect class="c" x="28" y="101" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Jun 2008</title></rect>
+<rect class="c" x="45" y="16" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Jul 2008</title></rect>
+<rect class="c" x="45" y="33" width="14" height="14" rx="2" ry="2" fill="#9be9a8" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>5 contributions in Aug 2008</title></rect>
+<rect class="c" x="45" y="50" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Sep 2008</title></rect>
+<rect class="c" x="45" y="67" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Oct 2008</title></rect>
+<rect class="c" x="45" y="84" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Nov 2008</title></rect>
+<rect class="c" x="45" y="101" width="14" height="14" rx="2" ry="2" fill="#ebedf0" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>0 contributions in Dec 2008</title></rect>
 </svg>

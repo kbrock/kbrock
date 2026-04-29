@@ -1,19 +1,10 @@
-# <img src="images/gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan
+# <img src="images/gem.svg" width="28" alt="ruby gem"/> Hi, I'm Keenan ![Gem Owner](https://img.shields.io/gem/u/kbrock?logo=rubygems&logoColor=9f4747&color=9f4747)
 
-## What I maintain
+<!-- CONTRIBUTIONS BEGIN -->
+<table>
+<tr><td colspan="2">
 
-| Gem | Downloads | What it does |
-|-----|-----------|-------------|
-| [optimist](https://github.com/ManageIQ/optimist) | 123M+ | Command-line option parser |
-| [ancestry](https://github.com/stefankroes/ancestry) | 33M+ | Tree structures for ActiveRecord |
-| [active_hash](https://github.com/active-hash/active_hash) | 17M+ | In-memory data modeling |
-
-Contributor to [Rails](https://contributors.rubyonrails.org/contributors/keenan-brock/commits), [rubygems.org](https://rubygems.org), and 100+ other libraries.
-
-## Contributions
-
-<!-- HEATMAP BEGIN -->
-<img src="images/contributions/month-labels.svg" alt="" />
+14,306 contributions in total<br>
 <a href="https://github.com/kbrock?tab=overview&from=2008-01-01&to=2008-12-31" title="6 contributions in 2008"><img src="images/contributions/2008.svg" alt="2008" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2009-01-01&to=2009-12-31" title="41 contributions in 2009"><img src="images/contributions/2009.svg" alt="2009" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2010-01-01&to=2010-12-31" title="52 contributions in 2010"><img src="images/contributions/2010.svg" alt="2010" /></a>
@@ -33,10 +24,27 @@ Contributor to [Rails](https://contributors.rubyonrails.org/contributors/keenan-
 <a href="https://github.com/kbrock?tab=overview&from=2024-01-01&to=2024-12-31" title="1095 contributions in 2024"><img src="images/contributions/2024.svg" alt="2024" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2025-01-01&to=2025-12-31" title="680 contributions in 2025"><img src="images/contributions/2025.svg" alt="2025" /></a>
 <a href="https://github.com/kbrock?tab=overview&from=2026-01-01&to=2026-12-31" title="417 contributions in 2026"><img src="images/contributions/2026.svg" alt="2026" /></a>
-<!-- HEATMAP END -->
 
-## Stats
+</td></tr>
+<tr><td valign="top">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=kbrock&show_icons=true&count_private=true&include_all_commits=true&theme=default)
+Contributed to<br>
+[manageiq](https://github.com/ManageIQ/manageiq),<br>
+[ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[floe](https://github.com/ManageIQ/floe),<br>
+[ruport](https://github.com/ruport/ruport),<br>
+[rails](https://github.com/rails/rails),<br>
+and 260 other repositories
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=kbrock&layout=compact&theme=default)
+</td><td>
+
+<img src="images/contributions/stats.svg" alt="Activity overview" />
+
+</td></tr>
+</table>
+
+<!-- CONTRIBUTIONS END -->
+

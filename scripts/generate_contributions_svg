@@ -1,21 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generate per-year contribution heatmap SVGs and a preview HTML page.
+# Generate per-year contribution heatmap SVGs and update README.
 #
-# Reads raw JSON from contributions/data/YYYY.json (produced by fetch_contributions.rb).
+# Reads raw JSON from images/contributions/data/YYYY.json.
 # Layout per year: 6 rows x 2 columns (H1: Jan-Jun, H2: Jul-Dec).
 # Thresholds computed globally so colors are consistent across years.
 #
-# Output:
-#   contributions/YYYY.svg         (one per year)
-#   contributions/month-labels.svg
-#   contributions/preview.html
-#
 # Usage:
-#   ruby scripts/generate_svg.rb
+#   ruby scripts/generate_contributions_svg
 
 require "json"
+require "set"
 
 DATA_DIR = File.expand_path("../images/contributions/data", __dir__)
 OUT_DIR  = File.expand_path("../images/contributions", __dir__)
@@ -41,6 +37,8 @@ MONTH_NAMES = %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
 
 def load_data
   years = {}
+  totals = { contributions: 0, commits: 0, prs: 0, reviews: 0, issues: 0, repos: Set.new, repo_commits: Hash.new(0) }
+
   Dir.glob(File.join(DATA_DIR, "*.json")).sort.each do |f|
     year = File.basename(f, ".json").to_i
     raw = JSON.parse(File.read(f))
@@ -50,8 +48,21 @@ def load_data
     days.each { |d| months[d["date"][5..6].to_i] += d["contributionCount"] }
 
     years[year] = months
+
+    totals[:contributions] += raw["contributionCalendar"]["totalContributions"]
+    totals[:commits] += raw["totalCommitContributions"]
+    totals[:prs] += raw["totalPullRequestContributions"]
+    totals[:reviews] += raw["totalPullRequestReviewContributions"]
+    totals[:issues] += raw["totalIssueContributions"]
+    raw["commitContributionsByRepository"].each do |r|
+      name = r["repository"]["nameWithOwner"]
+      totals[:repos] << name
+      totals[:repo_commits][name] += r["contributions"]["totalCount"]
+    end
   end
-  years.sort_by(&:first)
+
+  totals[:repos] = totals[:repos].size
+  [years.sort_by(&:first), totals]
 end
 
 # --- color ---
@@ -75,17 +86,33 @@ def escape_xml(s)
   s.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
 end
 
+def format_count(n)
+  n.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+end
+
 # --- SVG generators ---
 
-def year_svg(year, months, thresholds, show_label: false)
-  w = 2 * CELL_STEP - CELL_GAP
+MONTH_LABEL_WIDTH = 28
+
+def year_svg(year, months, thresholds, show_label: false, first: false)
+  cell_w = 2 * CELL_STEP - CELL_GAP
+  left = first ? MONTH_LABEL_WIDTH : 0
+  w = left + cell_w
   h = YEAR_LABEL_HEIGHT + 6 * CELL_STEP - CELL_GAP
 
   lines = []
   lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}" style="overflow:visible">)
   lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>)
+
+  if first
+    { 0 => "Jan", 2 => "Mar", 3 => "Oct", 5 => "Dec" }.each do |row, label|
+      y = YEAR_LABEL_HEIGHT + row * CELL_STEP + CELL_SIZE / 2 + 4
+      lines << %(<text x="0" y="#{y}">#{label}</text>)
+    end
+  end
+
   if show_label
-    lines << %(<text x="#{w / 2.0}" y="#{YEAR_LABEL_HEIGHT - 3}" text-anchor="middle">#{year}</text>)
+    lines << %(<text x="#{left + cell_w / 2.0}" y="#{YEAR_LABEL_HEIGHT - 3}" text-anchor="middle">#{year}</text>)
   end
 
   (1..12).each do |m|
@@ -93,92 +120,201 @@ def year_svg(year, months, thresholds, show_label: false)
     row = m <= 6 ? m - 1 : m - 7
     count = months[m] || 0
     color = COLORS[color_level(count, thresholds)]
-    x = col * CELL_STEP
+    x = left + col * CELL_STEP
     y = YEAR_LABEL_HEIGHT + row * CELL_STEP
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
-    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}"><title>#{escape_xml(tip)}</title></rect>)
+    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
   end
 
   lines << %(</svg>)
   lines.join("\n") + "\n"
 end
 
-def month_labels_svg
-  h = YEAR_LABEL_HEIGHT + 6 * CELL_STEP - CELL_GAP
-  w = 28
+def stats_svg(totals)
+  w = 340
+  h = 260
+  cx = w / 2.0
+  cy = h / 2.0 + 5
+  radius = 80
+  font = 13
+
+  # Order: top=Code reviews, right=Issues, bottom=Pull requests, left=Commits
+  values = [totals[:reviews], totals[:issues], totals[:prs], totals[:commits]]
+  max_val = values.max.to_f
+  norms = values.map { |v| v == 0 ? 0.0 : 0.15 + 0.85 * (v / max_val) }
+
+  dirs = [[0, -1], [1, 0], [0, 1], [-1, 0]]
+  shape = dirs.each_with_index.map { |(dx, dy), i| [cx + dx * radius * norms[i], cy + dy * radius * norms[i]] }
+
+  labels = [
+    { text: "Code reviews",  count: totals[:reviews], x: cx,               y_count: cy - radius - 20, y_text: cy - radius - 6, anchor: "middle" },
+    { text: "Issues",        count: totals[:issues],  x: cx + radius + 8,  y_count: cy - 2,           y_text: cy + 14,         anchor: "start" },
+    { text: "Pull requests", count: totals[:prs],     x: cx,               y_count: cy + radius + 16, y_text: cy + radius + 30, anchor: "middle" },
+    { text: "Commits",       count: totals[:commits], x: cx - radius - 8,  y_count: cy - 2,           y_text: cy + 14,         anchor: "end" },
+  ]
 
   lines = []
   lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}">)
-  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}</style>)
+  lines << %(<style>)
+  lines << %(  text { font-family: #{FONT_FAMILY}; font-size: #{font}px; fill: #57606a; })
+  lines << %(  .count { font-weight: 600; })
+  lines << %(</style>)
 
-  # H1 labels (Jan, Mar) and H2 labels (Oct, Dec)
-  { 0 => "Jan", 2 => "Mar", 3 => "Oct", 5 => "Dec" }.each do |row, label|
-    y = YEAR_LABEL_HEIGHT + row * CELL_STEP + CELL_SIZE / 2 + 4
-    lines << %(<text x="0" y="#{y}">#{label}</text>)
+  # Axis lines
+  dirs.each do |dx, dy|
+    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#30a14e" stroke-width="1.5" />)
+  end
+
+  # Axis endpoints (open circles)
+  dirs.each do |dx, dy|
+    lines << %(<circle cx="#{cx + dx * radius}" cy="#{cy + dy * radius}" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />)
+  end
+
+  # Data shape
+  pts = shape.map { |x, y| "#{x},#{y}" }.join(" ")
+  lines << %(<polygon points="#{pts}" fill="rgba(64, 196, 99, 0.25)" stroke="#40c463" stroke-width="2" />)
+
+  # Data points
+  shape.each do |x, y|
+    lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#40c463" />)
+  end
+
+  # Labels: count on one line, text below
+  labels.each do |l|
+    lines << %(<text x="#{l[:x]}" y="#{l[:y_count]}" text-anchor="#{l[:anchor]}" class="count">#{format_count(l[:count])}</text>)
+    lines << %(<text x="#{l[:x]}" y="#{l[:y_text]}" text-anchor="#{l[:anchor]}">#{l[:text]}</text>)
   end
 
   lines << %(</svg>)
   lines.join("\n") + "\n"
 end
 
-# --- HTML output ---
-
-def preview_html(year_data)
-  lines = []
-  lines << %(<!DOCTYPE html>)
-  lines << %(<html><head><meta charset="utf-8"><title>Contributions</title>)
-  lines << %(<style>)
-  lines << %(body{font-family:#{FONT_FAMILY};background:#fff;padding:20px})
-  lines << %(.heatmap{display:flex;align-items:flex-start;gap:2px})
-  lines << %(.heatmap a{display:inline-block;text-decoration:none})
-  lines << %(.heatmap img{display:block})
-  lines << %(</style>)
-  lines << %(</head><body>)
-  lines << %(<div class="heatmap">)
-  lines << %(<img src="month-labels.svg" alt="" />)
-
-  year_data.each do |year, months|
-    total = (1..12).sum { |m| months[m] || 0 }
-    url = "https://github.com/kbrock?tab=overview&amp;from=#{year}-01-01&amp;to=#{year}-12-31"
-    lines << %(<a href="#{url}" title="#{total} contributions in #{year}"><img src="#{year}.svg" alt="#{year}" /></a>)
-  end
-
-  lines << %(</div>)
-  lines << %(</body></html>)
-  lines.join("\n") + "\n"
-end
-
-# --- README snippet ---
+# --- README ---
 
 IMG_PREFIX = "images/contributions"
+GEM_ICON = %(<img src="images/gem.svg" width="12" alt="maintainer" />)
 
-def readme_snippet(year_data)
+CURATED_REPOS = [
+  { name: "manageiq",           repo: "ManageIQ/manageiq",                        gem: nil,                               maintain: false },
+  { name: "ancestry",           repo: "stefankroes/ancestry",                     gem: "ancestry",                        maintain: true },
+  { name: "active_hash",        repo: "active-hash/active_hash",                  gem: "active_hash",                     maintain: true },
+  { name: "optimist",           repo: "ManageIQ/optimist",                        gem: "optimist",                        maintain: true },
+  { name: "virtual_attributes", repo: "ManageIQ/activerecord-virtual_attributes", gem: "activerecord-virtual_attributes", maintain: true },
+  { name: "floe",               repo: "ManageIQ/floe",                            gem: "floe",                            maintain: false },
+  { name: "ruport",             repo: "ruport/ruport",                            gem: "ruport",                          maintain: false },
+  { name: "rails",              repo: "rails/rails",                              gem: nil,                               maintain: false },
+]
+
+def project_link(r)
+  "[#{r[:name]}](https://github.com/#{r[:repo]})"
+end
+
+def commit_badge(r, totals)
+  owner, repo = r[:repo].split("/")
+  "![#{format_count(totals[:repo_commits][r[:repo]] || 0)} commits](https://img.shields.io/github/commit-activity/t/#{owner}/#{repo}?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square)"
+end
+
+def download_badge(r)
+  return "" unless r[:gem]
+  "![#{r[:name]} downloads](https://img.shields.io/gem/dt/#{r[:gem]}?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen)"
+end
+
+def heatmap_snippet(year_data)
   lines = []
-  lines << %(<img src="#{IMG_PREFIX}/month-labels.svg" alt="" />)
-
   year_data.each do |year, months|
     total = (1..12).sum { |m| months[m] || 0 }
     url = "https://github.com/kbrock?tab=overview&from=#{year}-01-01&to=#{year}-12-31"
     lines << %(<a href="#{url}" title="#{total} contributions in #{year}"><img src="#{IMG_PREFIX}/#{year}.svg" alt="#{year}" /></a>)
   end
+  lines.join("\n")
+end
+
+def activity_overview(totals)
+  other_count = totals[:repos] - CURATED_REPOS.length
+  sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
+
+  lines = []
+
+  # --- Lower left: contributed-to + diamond in a table ---
+  lines << %(<table><tr><td valign="top">)
+  lines << ""
+  lines << "Contributed to<br>"
+  CURATED_REPOS.each do |r|
+    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    lines << "#{project_link(r)}#{icon},<br>"
+  end
+  lines << "and #{other_count} other repositories"
+  lines << ""
+  lines << %(</td><td>)
+  lines << ""
+  lines << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  lines << ""
+  lines << %(</td></tr></table>)
+  lines << ""
+
+  # --- Projects table (sorted by commits, both badges) ---
+  lines << "| Project | Commits | Downloads |"
+  lines << "|---------|--------:|----------:|"
+  sorted.each do |r|
+    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    lines << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
+  end
+  lines << "| and #{other_count} other repositories | | |"
 
   lines.join("\n")
 end
 
 README_PATH = File.expand_path("../README.md", __dir__)
-MARKER_BEGIN = "<!-- HEATMAP BEGIN -->"
-MARKER_END   = "<!-- HEATMAP END -->"
+MARKER_BEGIN = "<!-- CONTRIBUTIONS BEGIN -->"
+MARKER_END   = "<!-- CONTRIBUTIONS END -->"
 
-def update_readme(year_data)
+def update_readme(year_data, totals)
   content = File.read(README_PATH)
-  snippet = readme_snippet(year_data)
-  replacement = "#{MARKER_BEGIN}\n#{snippet}\n#{MARKER_END}"
 
   unless content.include?(MARKER_BEGIN) && content.include?(MARKER_END)
-    warn "  README.md missing HEATMAP markers, skipping update"
+    warn "  README.md missing CONTRIBUTIONS markers, skipping"
     return
   end
 
+  formatted_total = format_count(totals[:contributions])
+
+  snippet = []
+  snippet << %(<table>)
+  snippet << %(<tr><td colspan="2">)
+  snippet << ""
+  snippet << "#{formatted_total} contributions in total<br>"
+  snippet << heatmap_snippet(year_data)
+  snippet << ""
+  snippet << %(</td></tr>)
+  snippet << %(<tr><td valign="top">)
+  snippet << ""
+  snippet << "Contributed to<br>"
+  CURATED_REPOS.each do |r|
+    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    snippet << "#{project_link(r)}#{icon},<br>"
+  end
+  other_count = totals[:repos] - CURATED_REPOS.length
+  snippet << "and #{other_count} other repositories"
+  snippet << ""
+  snippet << %(</td><td>)
+  snippet << ""
+  snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  snippet << ""
+  snippet << %(</td></tr>)
+  snippet << %(</table>)
+  snippet << ""
+
+  # Projects table below (uncomment to include)
+  # sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
+  # snippet << "| Project | Commits | Downloads |"
+  # snippet << "|---------|--------:|----------:|"
+  # sorted.each do |r|
+  #   icon = r[:maintain] ? " #{GEM_ICON}" : ""
+  #   snippet << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
+  # end
+  # snippet << "| and #{other_count} other repositories | | |"
+
+  replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
   File.write(README_PATH, updated)
   warn "  README.md updated"
@@ -187,7 +323,7 @@ end
 # --- main ---
 
 def main
-  year_data = load_data
+  year_data, totals = load_data
   if year_data.empty?
     warn "No data in #{DATA_DIR}. Run fetch_contributions.rb first."
     exit 1
@@ -198,17 +334,14 @@ def main
 
   year_data.each_with_index do |(year, months), i|
     path = File.join(OUT_DIR, "#{year}.svg")
-    File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0)))
+    File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0), first: (i == 0)))
     warn "  #{path}"
   end
 
-  File.write(File.join(OUT_DIR, "month-labels.svg"), month_labels_svg)
-  warn "  month-labels.svg"
+  File.write(File.join(OUT_DIR, "stats.svg"), stats_svg(totals))
+  warn "  stats.svg"
 
-  File.write(File.join(OUT_DIR, "preview.html"), preview_html(year_data))
-  warn "  preview.html"
-
-  update_readme(year_data)
+  update_readme(year_data, totals)
 
   warn "Done. #{year_data.length} year SVGs generated."
 end
