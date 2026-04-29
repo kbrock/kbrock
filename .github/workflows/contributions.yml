@@ -31,4 +31,4 @@ jobs:
           git config user.name "kbrock-bot"
           git config user.email "bot@thebrocks.net"
           git add images/contributions/ README.md
-          git diff --staged --quiet || git commit -m "Update contribution heatmap" && git push
+          git diff --staged --quiet || (git commit -m "Update contribution heatmap" && git push)

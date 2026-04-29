@@ -30,10 +30,10 @@
 
 Contributed to<br>
 [manageiq](https://github.com/ManageIQ/manageiq),<br>
-[ancestry](https://github.com/stefankroes/ancestry) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
-[active_hash](https://github.com/active-hash/active_hash) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
-[optimist](https://github.com/ManageIQ/optimist) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
-[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <img src="images/gem.svg" width="12" alt="maintainer" />,<br>
+[ancestry](https://github.com/stefankroes/ancestry) <a href="https://rubygems.org/gems/ancestry" title="maintainer of ancestry"><img src="images/gem.svg" width="12" alt="maintainer" /></a>,<br>
+[active_hash](https://github.com/active-hash/active_hash) <a href="https://rubygems.org/gems/active_hash" title="maintainer of active_hash"><img src="images/gem.svg" width="12" alt="maintainer" /></a>,<br>
+[optimist](https://github.com/ManageIQ/optimist) <a href="https://rubygems.org/gems/optimist" title="maintainer of optimist"><img src="images/gem.svg" width="12" alt="maintainer" /></a>,<br>
+[virtual_attributes](https://github.com/ManageIQ/activerecord-virtual_attributes) <a href="https://rubygems.org/gems/activerecord-virtual_attributes" title="maintainer of activerecord-virtual_attributes"><img src="images/gem.svg" width="12" alt="maintainer" /></a>,<br>
 [floe](https://github.com/ManageIQ/floe),<br>
 [ruport](https://github.com/ruport/ruport),<br>
 [rails](https://github.com/rails/rails),<br>

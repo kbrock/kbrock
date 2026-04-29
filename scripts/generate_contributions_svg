@@ -192,7 +192,10 @@ end
 # --- README ---
 
 IMG_PREFIX = "images/contributions"
-GEM_ICON = %(<img src="images/gem.svg" width="12" alt="maintainer" />)
+def gem_icon(r)
+  return "" unless r[:maintain] && r[:gem]
+  %( <a href="https://rubygems.org/gems/#{r[:gem]}" title="maintainer of #{r[:gem]}"><img src="images/gem.svg" width="12" alt="maintainer" /></a>)
+end
 
 CURATED_REPOS = [
   { name: "manageiq",           repo: "ManageIQ/manageiq",                        gem: nil,                               maintain: false },
@@ -240,7 +243,7 @@ def activity_overview(totals)
   lines << ""
   lines << "Contributed to<br>"
   CURATED_REPOS.each do |r|
-    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    icon = gem_icon(r)
     lines << "#{project_link(r)}#{icon},<br>"
   end
   lines << "and #{other_count} other repositories"
@@ -256,7 +259,7 @@ def activity_overview(totals)
   lines << "| Project | Commits | Downloads |"
   lines << "|---------|--------:|----------:|"
   sorted.each do |r|
-    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    icon = gem_icon(r)
     lines << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
   end
   lines << "| and #{other_count} other repositories | | |"
@@ -290,7 +293,7 @@ def update_readme(year_data, totals)
   snippet << ""
   snippet << "Contributed to<br>"
   CURATED_REPOS.each do |r|
-    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    icon = gem_icon(r)
     snippet << "#{project_link(r)}#{icon},<br>"
   end
   other_count = totals[:repos] - CURATED_REPOS.length
@@ -309,7 +312,7 @@ def update_readme(year_data, totals)
   # snippet << "| Project | Commits | Downloads |"
   # snippet << "|---------|--------:|----------:|"
   # sorted.each do |r|
-  #   icon = r[:maintain] ? " #{GEM_ICON}" : ""
+  #   icon = gem_icon(r)
   #   snippet << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
   # end
   # snippet << "| and #{other_count} other repositories | | |"
