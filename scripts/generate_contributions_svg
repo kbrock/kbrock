@@ -1,21 +1,17 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Generate per-year contribution heatmap SVGs and a preview HTML page.
+# Generate per-year contribution heatmap SVGs and update README.
 #
-# Reads raw JSON from contributions/data/YYYY.json (produced by fetch_contributions.rb).
+# Reads raw JSON from images/contributions/data/YYYY.json.
 # Layout per year: 6 rows x 2 columns (H1: Jan-Jun, H2: Jul-Dec).
 # Thresholds computed globally so colors are consistent across years.
 #
-# Output:
-#   contributions/YYYY.svg         (one per year)
-#   contributions/month-labels.svg
-#   contributions/preview.html
-#
 # Usage:
-#   ruby scripts/generate_svg.rb
+#   ruby scripts/generate_contributions_svg
 
 require "json"
+require "set"
 
 DATA_DIR = File.expand_path("../images/contributions/data", __dir__)
 OUT_DIR  = File.expand_path("../images/contributions", __dir__)
@@ -90,6 +86,10 @@ def escape_xml(s)
   s.gsub("&", "&amp;").gsub("<", "&lt;").gsub(">", "&gt;")
 end
 
+def format_count(n)
+  n.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
+end
+
 # --- SVG generators ---
 
 MONTH_LABEL_WIDTH = 28
@@ -123,21 +123,14 @@ def year_svg(year, months, thresholds, show_label: false, first: false)
     x = left + col * CELL_STEP
     y = YEAR_LABEL_HEIGHT + row * CELL_STEP
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
-    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="rgba(31,40,40,0.05)" stroke-width="0.5" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
+    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
   end
 
   lines << %(</svg>)
   lines.join("\n") + "\n"
 end
 
-# --- stats SVG ---
-
-def format_count(n)
-  n.to_s.reverse.gsub(/(\d{3})(?=\d)/, '\\1,').reverse
-end
-
 def stats_svg(totals)
-  # Diamond: top=Code reviews, right=Issues, bottom=Pull requests, left=Commits
   w = 340
   h = 260
   cx = w / 2.0
@@ -145,7 +138,7 @@ def stats_svg(totals)
   radius = 80
   font = 13
 
-  # Order: top, right, bottom, left
+  # Order: top=Code reviews, right=Issues, bottom=Pull requests, left=Commits
   values = [totals[:reviews], totals[:issues], totals[:prs], totals[:commits]]
   max_val = values.max.to_f
   norms = values.map { |v| v == 0 ? 0.0 : 0.15 + 0.85 * (v / max_val) }
@@ -167,12 +160,12 @@ def stats_svg(totals)
   lines << %(  .count { font-weight: 600; })
   lines << %(</style>)
 
-  # Axis lines (dark green like GitHub's original)
+  # Axis lines
   dirs.each do |dx, dy|
     lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#30a14e" stroke-width="1.5" />)
   end
 
-  # Axis endpoints
+  # Axis endpoints (open circles)
   dirs.each do |dx, dy|
     lines << %(<circle cx="#{cx + dx * radius}" cy="#{cy + dy * radius}" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />)
   end
@@ -196,57 +189,53 @@ def stats_svg(totals)
   lines.join("\n") + "\n"
 end
 
-# --- README snippet ---
+# --- README ---
 
 IMG_PREFIX = "images/contributions"
-
-def readme_snippet(year_data)
-  lines = []
-  year_data.each do |year, months|
-    total = (1..12).sum { |m| months[m] || 0 }
-    url = "https://github.com/kbrock?tab=overview&from=#{year}-01-01&to=#{year}-12-31"
-    lines << %(<a href="#{url}" title="#{total} contributions in #{year}"><img src="#{IMG_PREFIX}/#{year}.svg" alt="#{year}" /></a>)
-  end
-
-  lines.join("\n")
-end
+GEM_ICON = %(<img src="images/gem.svg" width="12" alt="maintainer" />)
 
 CURATED_REPOS = [
-  { name: "manageiq",            repo: "ManageIQ/manageiq",                          gem: nil,                              maintain: false },
-  { name: "ancestry",            repo: "stefankroes/ancestry",                       gem: "ancestry",                       maintain: true },
-  { name: "active_hash",         repo: "active-hash/active_hash",                    gem: "active_hash",                    maintain: true },
-  { name: "optimist",            repo: "ManageIQ/optimist",                          gem: "optimist",                       maintain: true },
-  { name: "virtual_attributes",  repo: "ManageIQ/activerecord-virtual_attributes",   gem: "activerecord-virtual_attributes", maintain: true },
-  { name: "floe",                repo: "ManageIQ/floe",                              gem: "floe",                           maintain: false },
-  { name: "ruport",              repo: "ruport/ruport",                              gem: "ruport",                         maintain: false },
-  { name: "rails",               repo: "rails/rails",                                gem: nil,                              maintain: false },
+  { name: "manageiq",           repo: "ManageIQ/manageiq",                        gem: nil,                               maintain: false },
+  { name: "ancestry",           repo: "stefankroes/ancestry",                     gem: "ancestry",                        maintain: true },
+  { name: "active_hash",        repo: "active-hash/active_hash",                  gem: "active_hash",                     maintain: true },
+  { name: "optimist",           repo: "ManageIQ/optimist",                        gem: "optimist",                        maintain: true },
+  { name: "virtual_attributes", repo: "ManageIQ/activerecord-virtual_attributes", gem: "activerecord-virtual_attributes", maintain: true },
+  { name: "floe",               repo: "ManageIQ/floe",                            gem: "floe",                            maintain: false },
+  { name: "ruport",             repo: "ruport/ruport",                            gem: "ruport",                          maintain: false },
+  { name: "rails",              repo: "rails/rails",                              gem: nil,                               maintain: false },
 ]
-
-GEM_ICON = %(<img src="images/gem.svg" width="12" alt="maintainer" />)
 
 def project_link(r)
   "[#{r[:name]}](https://github.com/#{r[:repo]})"
 end
 
 def commit_badge(r, totals)
-  count = totals[:repo_commits][r[:repo]] || 0
-  encoded = format_count(count).gsub(",", "%2C")
-  "![](https://img.shields.io/badge/#{encoded}-commits-blue?style=flat-square&logo=git&logoColor=white)"
+  owner, repo = r[:repo].split("/")
+  "![#{format_count(totals[:repo_commits][r[:repo]] || 0)} commits](https://img.shields.io/github/commit-activity/t/#{owner}/#{repo}?authorFilter=kbrock&logo=git&logoColor=white&label=commits&style=flat-square)"
 end
 
 def download_badge(r)
   return "" unless r[:gem]
-  "![](https://img.shields.io/gem/dt/#{r[:gem]}?label=downloads&style=flat-square&color=brightgreen)"
+  "![#{r[:name]} downloads](https://img.shields.io/gem/dt/#{r[:gem]}?logo=rubygems&logoColor=9f4747&label=downloads&style=flat-square&color=brightgreen)"
+end
+
+def heatmap_snippet(year_data)
+  lines = []
+  year_data.each do |year, months|
+    total = (1..12).sum { |m| months[m] || 0 }
+    url = "https://github.com/kbrock?tab=overview&from=#{year}-01-01&to=#{year}-12-31"
+    lines << %(<a href="#{url}" title="#{total} contributions in #{year}"><img src="#{IMG_PREFIX}/#{year}.svg" alt="#{year}" /></a>)
+  end
+  lines.join("\n")
 end
 
 def activity_overview(totals)
   other_count = totals[:repos] - CURATED_REPOS.length
-  # Sort by downloads (gems first by download count, then non-gems by commits)
-  sorted = CURATED_REPOS.sort_by { |r| r[:gem] ? -1 : 0 }
+  sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
 
   lines = []
 
-  # --- Lower left: slim contributed-to list ---
+  # --- Lower left: contributed-to + diamond in a table ---
   lines << %(<table><tr><td valign="top">)
   lines << ""
   lines << "Contributed to<br>"
@@ -263,21 +252,7 @@ def activity_overview(totals)
   lines << %(</td></tr></table>)
   lines << ""
 
-  # --- comparison: p list ---
-  lines << "**Projects** (p list)"
-  lines << ""
-  lines << "<p>"
-  sorted.each do |r|
-    icon = r[:maintain] ? " #{GEM_ICON}" : ""
-    lines << "#{project_link(r)}#{icon} #{commit_badge(r, totals)} #{download_badge(r)}<br>"
-  end
-  lines << "and #{other_count} other repositories"
-  lines << "</p>"
-  lines << ""
-
-  # --- comparison: table ---
-  lines << "**Projects** (table)"
-  lines << ""
+  # --- Projects table (sorted by commits, both badges) ---
   lines << "| Project | Commits | Downloads |"
   lines << "|---------|--------:|----------:|"
   sorted.each do |r|
@@ -290,7 +265,6 @@ def activity_overview(totals)
 end
 
 README_PATH = File.expand_path("../README.md", __dir__)
-
 MARKER_BEGIN = "<!-- CONTRIBUTIONS BEGIN -->"
 MARKER_END   = "<!-- CONTRIBUTIONS END -->"
 
@@ -305,11 +279,40 @@ def update_readme(year_data, totals)
   formatted_total = format_count(totals[:contributions])
 
   snippet = []
-  snippet << "#{formatted_total} contributions in total"
+  snippet << %(<table>)
+  snippet << %(<tr><td colspan="2">)
   snippet << ""
-  snippet << readme_snippet(year_data)
+  snippet << "#{formatted_total} contributions in total<br>"
+  snippet << heatmap_snippet(year_data)
   snippet << ""
-  snippet << activity_overview(totals)
+  snippet << %(</td></tr>)
+  snippet << %(<tr><td valign="top">)
+  snippet << ""
+  snippet << "Contributed to<br>"
+  CURATED_REPOS.each do |r|
+    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    snippet << "#{project_link(r)}#{icon},<br>"
+  end
+  other_count = totals[:repos] - CURATED_REPOS.length
+  snippet << "and #{other_count} other repositories"
+  snippet << ""
+  snippet << %(</td><td>)
+  snippet << ""
+  snippet << %(<img src="#{IMG_PREFIX}/stats.svg" alt="Activity overview" />)
+  snippet << ""
+  snippet << %(</td></tr>)
+  snippet << %(</table>)
+  snippet << ""
+
+  # Projects table below
+  sorted = CURATED_REPOS.sort_by { |r| -(totals[:repo_commits][r[:repo]] || 0) }
+  snippet << "| Project | Commits | Downloads |"
+  snippet << "|---------|--------:|----------:|"
+  sorted.each do |r|
+    icon = r[:maintain] ? " #{GEM_ICON}" : ""
+    snippet << "| #{project_link(r)}#{icon} | #{commit_badge(r, totals)} | #{download_badge(r)} |"
+  end
+  snippet << "| and #{other_count} other repositories | | |"
 
   replacement = "#{MARKER_BEGIN}\n#{snippet.join("\n")}\n#{MARKER_END}"
   updated = content.sub(/#{Regexp.escape(MARKER_BEGIN)}.*?#{Regexp.escape(MARKER_END)}/m, replacement)
