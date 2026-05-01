@@ -11,17 +11,17 @@
 <circle cx="250.0" cy="135.0" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />
 <circle cx="170.0" cy="215.0" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />
 <circle cx="90.0" cy="135.0" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />
-<polygon points="170.0,113.05962540175108 183.48465033802503,135.0 170.0,171.82455945915993 90.0,135.0" fill="rgba(64, 196, 99, 0.25)" stroke="#40c463" stroke-width="2" />
-<circle cx="170.0" cy="113.05962540175108" r="3" fill="#40c463" />
-<circle cx="183.48465033802503" cy="135.0" r="3" fill="#40c463" />
-<circle cx="170.0" cy="171.82455945915993" r="3" fill="#40c463" />
+<polygon points="170.0,113.07518796992481 183.4812030075188,135.0 170.0,171.78947368421052 90.0,135.0" fill="rgba(64, 196, 99, 0.25)" stroke="#40c463" stroke-width="2" />
+<circle cx="170.0" cy="113.07518796992481" r="3" fill="#40c463" />
+<circle cx="183.4812030075188" cy="135.0" r="3" fill="#40c463" />
+<circle cx="170.0" cy="171.78947368421052" r="3" fill="#40c463" />
 <circle cx="90.0" cy="135.0" r="3" fill="#40c463" />
-<text x="170.0" y="35.0" text-anchor="middle" class="count">1,319</text>
+<text x="170.0" y="35.0" text-anchor="middle" class="count">1,320</text>
 <text x="170.0" y="49.0" text-anchor="middle">Code reviews</text>
 <text x="258.0" y="133.0" text-anchor="start" class="count">197</text>
 <text x="258.0" y="149.0" text-anchor="start">Issues</text>
-<text x="170.0" y="231.0" text-anchor="middle" class="count">3,294</text>
+<text x="170.0" y="231.0" text-anchor="middle" class="count">3,297</text>
 <text x="170.0" y="245.0" text-anchor="middle">Pull requests</text>
-<text x="82.0" y="133.0" text-anchor="end" class="count">9,023</text>
+<text x="82.0" y="133.0" text-anchor="end" class="count">9,044</text>
 <text x="82.0" y="149.0" text-anchor="end">Commits</text>
 </svg>
