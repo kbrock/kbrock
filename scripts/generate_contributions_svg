@@ -25,7 +25,7 @@ COLORS = {
 }
 
 CELL_SIZE   = 14
-CELL_GAP    = 3
+CELL_GAP    = 4
 CELL_STEP   = CELL_SIZE + CELL_GAP
 YEAR_LABEL_HEIGHT = 16
 FONT_SIZE   = 11
@@ -124,7 +124,7 @@ def year_svg(year, months, thresholds, year_thresholds, show_label: false, first
     x = left + col * CELL_STEP
     y = YEAR_LABEL_HEIGHT + row * CELL_STEP
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
-    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
+    lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="#afb8c1" stroke-width="1" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
   end
 
   total = (1..12).sum { |m| months[m] || 0 }
@@ -166,23 +166,18 @@ def stats_svg(totals)
   lines << %(  .count { font-weight: 600; })
   lines << %(</style>)
 
-  # Axis lines
-  dirs.each do |dx, dy|
-    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#30a14e" stroke-width="1.5" />)
-  end
-
-  # Axis endpoints (open circles)
-  dirs.each do |dx, dy|
-    lines << %(<circle cx="#{cx + dx * radius}" cy="#{cy + dy * radius}" r="3" fill="none" stroke="#30a14e" stroke-width="1.5" />)
-  end
-
-  # Data shape
+  # Data shape (drawn behind axis so axis cuts across)
   pts = shape.map { |x, y| "#{x},#{y}" }.join(" ")
-  lines << %(<polygon points="#{pts}" fill="rgba(64, 196, 99, 0.25)" stroke="#40c463" stroke-width="2" />)
+  lines << %(<polygon points="#{pts}" fill="#40c463" stroke="#40c463" stroke-width="5" stroke-linejoin="round" opacity="0.5" />)
 
-  # Data points
+  # Axis lines (on top of body)
+  dirs.each do |dx, dy|
+    lines << %(<line x1="#{cx}" y1="#{cy}" x2="#{cx + dx * radius}" y2="#{cy + dy * radius}" stroke="#116329" stroke-width="2" stroke-linecap="round" />)
+  end
+
+  # Data points (open circles, on top)
   shape.each do |x, y|
-    lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#40c463" />)
+    lines << %(<circle cx="#{x}" cy="#{y}" r="3" fill="#ffffff" stroke="#116329" stroke-width="2" />)
   end
 
   # Labels: count on one line, text below
