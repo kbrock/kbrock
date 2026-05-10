@@ -94,15 +94,16 @@ end
 
 MONTH_LABEL_WIDTH = 28
 
-def year_svg(year, months, thresholds, show_label: false, first: false)
+def year_svg(year, months, thresholds, year_thresholds, show_label: false, first: false)
   cell_w = 2 * CELL_STEP - CELL_GAP
   left = first ? MONTH_LABEL_WIDTH : 0
   w = left + cell_w
-  h = YEAR_LABEL_HEIGHT + 6 * CELL_STEP - CELL_GAP
+  total_y = YEAR_LABEL_HEIGHT + 6 * CELL_STEP
+  h = total_y + CELL_SIZE
 
   lines = []
   lines << %(<svg xmlns="http://www.w3.org/2000/svg" width="#{w}" height="#{h}" viewBox="0 0 #{w} #{h}" style="overflow:visible">)
-  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>)
+  lines << %(<style>text{font-family:#{FONT_FAMILY};font-size:#{FONT_SIZE}px;fill:#57606a}.yt{font-size:9px;fill:#24292f;font-weight:600}rect.c:hover{stroke:#1b1f23;stroke-width:1}</style>)
 
   if first
     { 0 => "Jan", 2 => "Mar", 3 => "Oct", 5 => "Dec" }.each do |row, label|
@@ -125,6 +126,11 @@ def year_svg(year, months, thresholds, show_label: false, first: false)
     tip = "#{count} contribution#{count == 1 ? "" : "s"} in #{MONTH_NAMES[m - 1]} #{year}"
     lines << %(<rect class="c" x="#{x}" y="#{y}" width="#{CELL_SIZE}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#{color}" stroke="#d1d9e0" stroke-width="1" shape-rendering="geometricPrecision"><title>#{escape_xml(tip)}</title></rect>)
   end
+
+  total = (1..12).sum { |m| months[m] || 0 }
+  outline = COLORS[[color_level(total, year_thresholds), 1].max]
+  lines << %(<rect class="c" x="#{left}" y="#{total_y}" width="#{cell_w}" height="#{CELL_SIZE}" rx="2" ry="2" fill="#ffffff" stroke="#{outline}" stroke-width="1.5" shape-rendering="geometricPrecision" />)
+  lines << %(<text class="yt" x="#{left + cell_w / 2.0}" y="#{total_y + CELL_SIZE - 4}" text-anchor="middle">#{format_count(total)}</text>)
 
   lines << %(</svg>)
   lines.join("\n") + "\n"
@@ -334,10 +340,11 @@ def main
 
   all_counts = year_data.flat_map { |_, months| (1..12).map { |m| months[m] || 0 } }
   thresholds = compute_thresholds(all_counts)
+  year_thresholds = compute_thresholds(year_data.map { |_, m| (1..12).sum { |i| m[i] || 0 } })
 
   year_data.each_with_index do |(year, months), i|
     path = File.join(OUT_DIR, "#{year}.svg")
-    File.write(path, year_svg(year, months, thresholds, show_label: (i % 2 == 0), first: (i == 0)))
+    File.write(path, year_svg(year, months, thresholds, year_thresholds, show_label: (i % 2 == 0), first: (i == 0)))
     warn "  #{path}"
   end
 
