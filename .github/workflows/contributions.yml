@@ -2,7 +2,7 @@ name: Update contribution heatmap
 
 on:
   schedule:
-    - cron: '0 9 1 * *'  # 1st of each month at 9am UTC
+    - cron: '0 8 * * 1'  # Mondays at 8am UTC (4am EDT / 3am EST)
   workflow_dispatch:       # manual trigger
 
 permissions:
