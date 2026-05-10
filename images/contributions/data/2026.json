@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 447,
+    "totalContributions": 471,
     "weeks": [
       {
         "contributionDays": [
@@ -542,11 +542,11 @@
           },
           {
             "date": "2026-04-28",
-            "contributionCount": 44
+            "contributionCount": 45
           },
           {
             "date": "2026-04-29",
-            "contributionCount": 3
+            "contributionCount": 2
           },
           {
             "date": "2026-04-30",
@@ -554,11 +554,11 @@
           },
           {
             "date": "2026-05-01",
-            "contributionCount": 5
+            "contributionCount": 7
           },
           {
             "date": "2026-05-02",
-            "contributionCount": 0
+            "contributionCount": 9
           }
         ]
       },
@@ -566,15 +566,15 @@
         "contributionDays": [
           {
             "date": "2026-05-03",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-05-04",
-            "contributionCount": 0
+            "contributionCount": 6
           },
           {
             "date": "2026-05-05",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-05-06",
@@ -582,15 +582,15 @@
           },
           {
             "date": "2026-05-07",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-05-08",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-05-09",
-            "contributionCount": 0
+            "contributionCount": 3
           }
         ]
       },
@@ -1676,18 +1676,18 @@
       }
     ]
   },
-  "totalCommitContributions": 322,
-  "totalPullRequestContributions": 85,
+  "totalCommitContributions": 342,
+  "totalPullRequestContributions": 87,
   "totalPullRequestReviewContributions": 7,
   "totalIssueContributions": 1,
-  "totalRepositoriesWithContributedCommits": 17,
+  "totalRepositoriesWithContributedCommits": 20,
   "commitContributionsByRepository": [
     {
       "repository": {
         "nameWithOwner": "stefankroes/ancestry"
       },
       "contributions": {
-        "totalCount": 127
+        "totalCount": 129
       }
     },
     {
@@ -1695,7 +1695,7 @@
         "nameWithOwner": "kbrock/benchmark-sweet"
       },
       "contributions": {
-        "totalCount": 42
+        "totalCount": 44
       }
     },
     {
@@ -1711,7 +1711,7 @@
         "nameWithOwner": "kbrock/tree-bench"
       },
       "contributions": {
-        "totalCount": 34
+        "totalCount": 36
       }
     },
     {
@@ -1740,7 +1740,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/docs"
+        "nameWithOwner": "kbrock/sonic-pi-songs"
       },
       "contributions": {
         "totalCount": 6
@@ -1749,6 +1749,14 @@
     {
       "repository": {
         "nameWithOwner": "kbrock/dotfiles"
+      },
+      "contributions": {
+        "totalCount": 6
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "kbrock/docs"
       },
       "contributions": {
         "totalCount": 6
@@ -1772,6 +1780,14 @@
     },
     {
       "repository": {
+        "nameWithOwner": "kbrock/mac-media"
+      },
+      "contributions": {
+        "totalCount": 5
+      }
+    },
+    {
+      "repository": {
         "nameWithOwner": "active-hash/active_hash"
       },
       "contributions": {
@@ -1780,7 +1796,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/sonic-pi-songs"
+        "nameWithOwner": "kbrock/elliscolegolf"
       },
       "contributions": {
         "totalCount": 4
@@ -1796,18 +1812,26 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/help_explain"
+        "nameWithOwner": "kbrock/johnny_five_sample"
       },
       "contributions": {
-        "totalCount": 2
+        "totalCount": 3
       }
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/johnny_five_sample"
+        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
-        "totalCount": 2
+        "totalCount": 3
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "jgm/pandoc"
+      },
+      "contributions": {
+        "totalCount": 1
       }
     },
     {
