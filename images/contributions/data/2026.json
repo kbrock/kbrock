@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 494,
+    "totalContributions": 509,
     "weeks": [
       {
         "contributionDays": [
@@ -670,7 +670,7 @@
           },
           {
             "date": "2026-05-26",
-            "contributionCount": 0
+            "contributionCount": 5
           },
           {
             "date": "2026-05-27",
@@ -698,23 +698,23 @@
           },
           {
             "date": "2026-06-01",
-            "contributionCount": 0
+            "contributionCount": 2
           },
           {
             "date": "2026-06-02",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-06-03",
-            "contributionCount": 0
+            "contributionCount": 2
           },
           {
             "date": "2026-06-04",
-            "contributionCount": 0
+            "contributionCount": 3
           },
           {
             "date": "2026-06-05",
-            "contributionCount": 0
+            "contributionCount": 2
           },
           {
             "date": "2026-06-06",
@@ -1676,7 +1676,7 @@
       }
     ]
   },
-  "totalCommitContributions": 364,
+  "totalCommitContributions": 378,
   "totalPullRequestContributions": 87,
   "totalPullRequestReviewContributions": 9,
   "totalIssueContributions": 1,
@@ -1727,7 +1727,7 @@
         "nameWithOwner": "kbrock/sonic-pi-songs"
       },
       "contributions": {
-        "totalCount": 14
+        "totalCount": 27
       }
     },
     {
@@ -1796,6 +1796,14 @@
     },
     {
       "repository": {
+        "nameWithOwner": "kbrock/help_explain"
+      },
+      "contributions": {
+        "totalCount": 5
+      }
+    },
+    {
+      "repository": {
         "nameWithOwner": "kbrock/elliscolegolf"
       },
       "contributions": {
@@ -1805,14 +1813,6 @@
     {
       "repository": {
         "nameWithOwner": "kbrock/johnny_five_sample"
-      },
-      "contributions": {
-        "totalCount": 4
-      }
-    },
-    {
-      "repository": {
-        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
         "totalCount": 4
@@ -1836,7 +1836,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/bin"
+        "nameWithOwner": "kbrock/audio_book_creator"
       },
       "contributions": {
         "totalCount": 1
@@ -1844,7 +1844,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/audio_book_creator"
+        "nameWithOwner": "kbrock/bin"
       },
       "contributions": {
         "totalCount": 1
