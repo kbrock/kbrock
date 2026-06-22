@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 513,
+    "totalContributions": 517,
     "weeks": [
       {
         "contributionDays": [
@@ -430,7 +430,7 @@
           },
           {
             "date": "2026-04-04",
-            "contributionCount": 12
+            "contributionCount": 14
           }
         ]
       },
@@ -766,7 +766,7 @@
           },
           {
             "date": "2026-06-16",
-            "contributionCount": 0
+            "contributionCount": 2
           },
           {
             "date": "2026-06-17",
@@ -1676,11 +1676,11 @@
       }
     ]
   },
-  "totalCommitContributions": 380,
+  "totalCommitContributions": 383,
   "totalPullRequestContributions": 87,
   "totalPullRequestReviewContributions": 11,
   "totalIssueContributions": 1,
-  "totalRepositoriesWithContributedCommits": 21,
+  "totalRepositoriesWithContributedCommits": 22,
   "commitContributionsByRepository": [
     {
       "repository": {
@@ -1764,14 +1764,6 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/docs"
-      },
-      "contributions": {
-        "totalCount": 6
-      }
-    },
-    {
-      "repository": {
         "nameWithOwner": "kbrock/dotfiles"
       },
       "contributions": {
@@ -1780,7 +1772,15 @@
     },
     {
       "repository": {
-        "nameWithOwner": "ManageIQ/activerecord-virtual_attributes"
+        "nameWithOwner": "kbrock/docs"
+      },
+      "contributions": {
+        "totalCount": 6
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
         "totalCount": 5
@@ -1796,7 +1796,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/help_explain"
+        "nameWithOwner": "ManageIQ/activerecord-virtual_attributes"
       },
       "contributions": {
         "totalCount": 5
@@ -1821,6 +1821,14 @@
     {
       "repository": {
         "nameWithOwner": "kbrock/guru_two"
+      },
+      "contributions": {
+        "totalCount": 3
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "kbrock/hello_roda"
       },
       "contributions": {
         "totalCount": 3
