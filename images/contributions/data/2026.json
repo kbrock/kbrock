@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 556,
+    "totalContributions": 570,
     "weeks": [
       {
         "contributionDays": [
@@ -866,15 +866,15 @@
           },
           {
             "date": "2026-07-08",
-            "contributionCount": 0
+            "contributionCount": 6
           },
           {
             "date": "2026-07-09",
-            "contributionCount": 0
+            "contributionCount": 4
           },
           {
             "date": "2026-07-10",
-            "contributionCount": 0
+            "contributionCount": 4
           },
           {
             "date": "2026-07-11",
@@ -1676,7 +1676,7 @@
       }
     ]
   },
-  "totalCommitContributions": 386,
+  "totalCommitContributions": 388,
   "totalPullRequestContributions": 89,
   "totalPullRequestReviewContributions": 11,
   "totalIssueContributions": 5,
@@ -1764,10 +1764,10 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/dotfiles"
+        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
-        "totalCount": 6
+        "totalCount": 7
       }
     },
     {
@@ -1780,7 +1780,15 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/help_explain"
+        "nameWithOwner": "kbrock/dotfiles"
+      },
+      "contributions": {
+        "totalCount": 6
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "kbrock/johnny_five_sample"
       },
       "contributions": {
         "totalCount": 6
@@ -1804,14 +1812,6 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/johnny_five_sample"
-      },
-      "contributions": {
-        "totalCount": 5
-      }
-    },
-    {
-      "repository": {
         "nameWithOwner": "kbrock/elliscolegolf"
       },
       "contributions": {
@@ -1820,7 +1820,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/guru_two"
+        "nameWithOwner": "kbrock/hello_roda"
       },
       "contributions": {
         "totalCount": 3
@@ -1828,7 +1828,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/hello_roda"
+        "nameWithOwner": "kbrock/guru_two"
       },
       "contributions": {
         "totalCount": 3
