@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 584,
+    "totalContributions": 586,
     "weeks": [
       {
         "contributionDays": [
@@ -890,7 +890,7 @@
           },
           {
             "date": "2026-07-13",
-            "contributionCount": 10
+            "contributionCount": 9
           },
           {
             "date": "2026-07-14",
@@ -926,7 +926,7 @@
           },
           {
             "date": "2026-07-21",
-            "contributionCount": 0
+            "contributionCount": 3
           },
           {
             "date": "2026-07-22",
@@ -1676,7 +1676,7 @@
       }
     ]
   },
-  "totalCommitContributions": 399,
+  "totalCommitContributions": 401,
   "totalPullRequestContributions": 91,
   "totalPullRequestReviewContributions": 12,
   "totalIssueContributions": 5,
@@ -1748,6 +1748,14 @@
     },
     {
       "repository": {
+        "nameWithOwner": "kbrock/johnny_five_sample"
+      },
+      "contributions": {
+        "totalCount": 8
+      }
+    },
+    {
+      "repository": {
         "nameWithOwner": "kbrock/kbrock.github.io"
       },
       "contributions": {
@@ -1788,14 +1796,6 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/johnny_five_sample"
-      },
-      "contributions": {
-        "totalCount": 6
-      }
-    },
-    {
-      "repository": {
         "nameWithOwner": "ManageIQ/activerecord-virtual_attributes"
       },
       "contributions": {
@@ -1820,7 +1820,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/hello_roda"
+        "nameWithOwner": "kbrock/guru_two"
       },
       "contributions": {
         "totalCount": 3
@@ -1828,7 +1828,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/guru_two"
+        "nameWithOwner": "kbrock/hello_roda"
       },
       "contributions": {
         "totalCount": 3
@@ -1844,7 +1844,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/audio_book_creator"
+        "nameWithOwner": "sonic-pi-net/sonic-pi"
       },
       "contributions": {
         "totalCount": 1
@@ -1852,7 +1852,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "sonic-pi-net/sonic-pi"
+        "nameWithOwner": "kbrock/audio_book_creator"
       },
       "contributions": {
         "totalCount": 1
