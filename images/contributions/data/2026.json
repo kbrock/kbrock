@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 586,
+    "totalContributions": 591,
     "weeks": [
       {
         "contributionDays": [
@@ -958,7 +958,7 @@
           },
           {
             "date": "2026-07-28",
-            "contributionCount": 0
+            "contributionCount": 5
           },
           {
             "date": "2026-07-29",
@@ -1676,9 +1676,9 @@
       }
     ]
   },
-  "totalCommitContributions": 401,
+  "totalCommitContributions": 405,
   "totalPullRequestContributions": 91,
-  "totalPullRequestReviewContributions": 12,
+  "totalPullRequestReviewContributions": 13,
   "totalIssueContributions": 5,
   "totalRepositoriesWithContributedCommits": 23,
   "commitContributionsByRepository": [
@@ -1740,10 +1740,10 @@
     },
     {
       "repository": {
-        "nameWithOwner": "active-hash/active_hash"
+        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
-        "totalCount": 9
+        "totalCount": 10
       }
     },
     {
@@ -1751,7 +1751,15 @@
         "nameWithOwner": "kbrock/johnny_five_sample"
       },
       "contributions": {
-        "totalCount": 8
+        "totalCount": 9
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "active-hash/active_hash"
+      },
+      "contributions": {
+        "totalCount": 9
       }
     },
     {
@@ -1765,14 +1773,6 @@
     {
       "repository": {
         "nameWithOwner": "kbrock/mac-media"
-      },
-      "contributions": {
-        "totalCount": 7
-      }
-    },
-    {
-      "repository": {
-        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
         "totalCount": 7
@@ -1852,7 +1852,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/audio_book_creator"
+        "nameWithOwner": "kbrock/bin"
       },
       "contributions": {
         "totalCount": 1
@@ -1860,7 +1860,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/bin"
+        "nameWithOwner": "kbrock/audio_book_creator"
       },
       "contributions": {
         "totalCount": 1
