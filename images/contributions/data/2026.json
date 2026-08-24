@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 619,
+    "totalContributions": 620,
     "weeks": [
       {
         "contributionDays": [
@@ -1066,7 +1066,7 @@
           },
           {
             "date": "2026-08-21",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-08-22",
@@ -1676,11 +1676,11 @@
       }
     ]
   },
-  "totalCommitContributions": 430,
+  "totalCommitContributions": 431,
   "totalPullRequestContributions": 92,
   "totalPullRequestReviewContributions": 14,
   "totalIssueContributions": 5,
-  "totalRepositoriesWithContributedCommits": 23,
+  "totalRepositoriesWithContributedCommits": 24,
   "commitContributionsByRepository": [
     {
       "repository": {
@@ -1764,7 +1764,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/johnny_five_sample"
+        "nameWithOwner": "active-hash/active_hash"
       },
       "contributions": {
         "totalCount": 9
@@ -1772,7 +1772,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "active-hash/active_hash"
+        "nameWithOwner": "kbrock/johnny_five_sample"
       },
       "contributions": {
         "totalCount": 9
@@ -1788,7 +1788,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/docs"
+        "nameWithOwner": "kbrock/dotfiles"
       },
       "contributions": {
         "totalCount": 6
@@ -1796,7 +1796,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/dotfiles"
+        "nameWithOwner": "kbrock/docs"
       },
       "contributions": {
         "totalCount": 6
@@ -1861,6 +1861,14 @@
     {
       "repository": {
         "nameWithOwner": "kbrock/audio_book_creator"
+      },
+      "contributions": {
+        "totalCount": 1
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "MiniProfiler/rack-mini-profiler"
       },
       "contributions": {
         "totalCount": 1
