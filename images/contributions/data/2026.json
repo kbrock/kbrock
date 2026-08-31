@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 620,
+    "totalContributions": 643,
     "weeks": [
       {
         "contributionDays": [
@@ -310,7 +310,7 @@
         "contributionDays": [
           {
             "date": "2026-03-08",
-            "contributionCount": 34
+            "contributionCount": 38
           },
           {
             "date": "2026-03-09",
@@ -482,11 +482,11 @@
           },
           {
             "date": "2026-04-15",
-            "contributionCount": 3
+            "contributionCount": 5
           },
           {
             "date": "2026-04-16",
-            "contributionCount": 3
+            "contributionCount": 5
           },
           {
             "date": "2026-04-17",
@@ -790,7 +790,7 @@
         "contributionDays": [
           {
             "date": "2026-06-21",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-06-22",
@@ -994,7 +994,7 @@
           },
           {
             "date": "2026-08-05",
-            "contributionCount": 7
+            "contributionCount": 9
           },
           {
             "date": "2026-08-06",
@@ -1110,11 +1110,11 @@
         "contributionDays": [
           {
             "date": "2026-08-30",
-            "contributionCount": 0
+            "contributionCount": 11
           },
           {
             "date": "2026-08-31",
-            "contributionCount": 0
+            "contributionCount": 1
           },
           {
             "date": "2026-09-01",
@@ -1676,7 +1676,7 @@
       }
     ]
   },
-  "totalCommitContributions": 431,
+  "totalCommitContributions": 454,
   "totalPullRequestContributions": 92,
   "totalPullRequestReviewContributions": 14,
   "totalIssueContributions": 5,
@@ -1708,7 +1708,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/sonic-pi-songs"
+        "nameWithOwner": "kbrock/tree-bench"
       },
       "contributions": {
         "totalCount": 37
@@ -1716,7 +1716,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/tree-bench"
+        "nameWithOwner": "kbrock/sonic-pi-songs"
       },
       "contributions": {
         "totalCount": 37
@@ -1728,6 +1728,14 @@
       },
       "contributions": {
         "totalCount": 29
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "kbrock/dotfiles"
+      },
+      "contributions": {
+        "totalCount": 28
       }
     },
     {
@@ -1748,14 +1756,6 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/hello_roda"
-      },
-      "contributions": {
-        "totalCount": 10
-      }
-    },
-    {
-      "repository": {
         "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
@@ -1764,10 +1764,10 @@
     },
     {
       "repository": {
-        "nameWithOwner": "active-hash/active_hash"
+        "nameWithOwner": "kbrock/hello_roda"
       },
       "contributions": {
-        "totalCount": 9
+        "totalCount": 10
       }
     },
     {
@@ -1780,18 +1780,18 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/kbrock.github.io"
+        "nameWithOwner": "active-hash/active_hash"
       },
       "contributions": {
-        "totalCount": 7
+        "totalCount": 9
       }
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/dotfiles"
+        "nameWithOwner": "kbrock/kbrock.github.io"
       },
       "contributions": {
-        "totalCount": 6
+        "totalCount": 7
       }
     },
     {
@@ -1836,15 +1836,15 @@
     },
     {
       "repository": {
-        "nameWithOwner": "sonic-pi-net/sonic-pi"
+        "nameWithOwner": "kbrock/bin"
       },
       "contributions": {
-        "totalCount": 1
+        "totalCount": 2
       }
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/bin"
+        "nameWithOwner": "sonic-pi-net/sonic-pi"
       },
       "contributions": {
         "totalCount": 1
@@ -1860,7 +1860,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/audio_book_creator"
+        "nameWithOwner": "MiniProfiler/rack-mini-profiler"
       },
       "contributions": {
         "totalCount": 1
@@ -1868,7 +1868,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "MiniProfiler/rack-mini-profiler"
+        "nameWithOwner": "kbrock/audio_book_creator"
       },
       "contributions": {
         "totalCount": 1
