@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 706,
+    "totalContributions": 733,
     "weeks": [
       {
         "contributionDays": [
@@ -1222,11 +1222,11 @@
           },
           {
             "date": "2026-09-24",
-            "contributionCount": 4
+            "contributionCount": 3
           },
           {
             "date": "2026-09-25",
-            "contributionCount": 6
+            "contributionCount": 5
           },
           {
             "date": "2026-09-26",
@@ -1250,7 +1250,7 @@
           },
           {
             "date": "2026-09-30",
-            "contributionCount": 4
+            "contributionCount": 3
           },
           {
             "date": "2026-10-01",
@@ -1274,23 +1274,23 @@
           },
           {
             "date": "2026-10-05",
-            "contributionCount": 0
+            "contributionCount": 2
           },
           {
             "date": "2026-10-06",
-            "contributionCount": 0
+            "contributionCount": 5
           },
           {
             "date": "2026-10-07",
-            "contributionCount": 0
+            "contributionCount": 5
           },
           {
             "date": "2026-10-08",
-            "contributionCount": 0
+            "contributionCount": 15
           },
           {
             "date": "2026-10-09",
-            "contributionCount": 0
+            "contributionCount": 3
           },
           {
             "date": "2026-10-10",
@@ -1676,8 +1676,8 @@
       }
     ]
   },
-  "totalCommitContributions": 459,
-  "totalPullRequestContributions": 93,
+  "totalCommitContributions": 468,
+  "totalPullRequestContributions": 95,
   "totalPullRequestReviewContributions": 14,
   "totalIssueContributions": 5,
   "totalRepositoriesWithContributedCommits": 24,
@@ -1708,7 +1708,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/sonic-pi-songs"
+        "nameWithOwner": "kbrock/dotfiles"
       },
       "contributions": {
         "totalCount": 37
@@ -1724,18 +1724,18 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/kbrock"
+        "nameWithOwner": "kbrock/sonic-pi-songs"
       },
       "contributions": {
-        "totalCount": 29
+        "totalCount": 37
       }
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/dotfiles"
+        "nameWithOwner": "kbrock/kbrock"
       },
       "contributions": {
-        "totalCount": 28
+        "totalCount": 29
       }
     },
     {
@@ -1748,7 +1748,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/help_explain"
+        "nameWithOwner": "kbrock/CalendarIcons"
       },
       "contributions": {
         "totalCount": 11
@@ -1756,7 +1756,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/CalendarIcons"
+        "nameWithOwner": "kbrock/help_explain"
       },
       "contributions": {
         "totalCount": 11
@@ -1812,7 +1812,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/groceries"
+        "nameWithOwner": "kbrock/bin"
       },
       "contributions": {
         "totalCount": 5
@@ -1820,7 +1820,7 @@
     },
     {
       "repository": {
-        "nameWithOwner": "kbrock/bin"
+        "nameWithOwner": "kbrock/groceries"
       },
       "contributions": {
         "totalCount": 5
@@ -1844,22 +1844,6 @@
     },
     {
       "repository": {
-        "nameWithOwner": "jgm/pandoc"
-      },
-      "contributions": {
-        "totalCount": 1
-      }
-    },
-    {
-      "repository": {
-        "nameWithOwner": "sonic-pi-net/sonic-pi"
-      },
-      "contributions": {
-        "totalCount": 1
-      }
-    },
-    {
-      "repository": {
         "nameWithOwner": "kbrock/audio_book_creator"
       },
       "contributions": {
@@ -1868,7 +1852,23 @@
     },
     {
       "repository": {
+        "nameWithOwner": "jgm/pandoc"
+      },
+      "contributions": {
+        "totalCount": 1
+      }
+    },
+    {
+      "repository": {
         "nameWithOwner": "MiniProfiler/rack-mini-profiler"
+      },
+      "contributions": {
+        "totalCount": 1
+      }
+    },
+    {
+      "repository": {
+        "nameWithOwner": "sonic-pi-net/sonic-pi"
       },
       "contributions": {
         "totalCount": 1
